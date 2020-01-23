@@ -1,13 +1,10 @@
 import { NextPage } from 'next'
-import Header from '../components/Header'
+import Main from '../components/layouts/Main'
 
 const HomePage: NextPage = () => (
-  <div>
-    <Header />
-    <div>
-      Daily TODO Log
-    </div>
-  </div>
+  <Main>
+    Daily TODO Log
+  </Main>
 )
 
 export default HomePage
