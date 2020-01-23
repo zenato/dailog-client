@@ -1,10 +1,10 @@
 import { NextPage } from 'next'
-import Main from '../components/layouts/Main'
+import Layout from '../components/layouts/Main'
 
 const HomePage: NextPage = () => (
-  <Main>
+  <Layout>
     Daily TODO Log
-  </Main>
+  </Layout>
 )
 
 export default HomePage

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Link from 'next/link'
 
 const Container = styled.div`
   background-color: #eee;
@@ -6,7 +7,9 @@ const Container = styled.div`
 
 const Header = () => (
   <Container>
-    Header Component
+    <Link href="/">Dailog</Link>
+    <Link href="/profile">Profile</Link>
+    <Link href="/login">Login</Link>
   </Container>
 )
 
