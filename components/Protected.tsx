@@ -17,7 +17,7 @@ const Protected: React.SFC = ({ children }) => {
     }
     return (
       <Head>
-          <meta http-equiv="refresh" content={`0;URL="${LOGIN_URL}"`} />
+          <meta httpEquiv="refresh" content={`0;URL="${LOGIN_URL}"`} />
       </Head>
     )
   }
