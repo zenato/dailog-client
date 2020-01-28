@@ -1,8 +1,7 @@
+import { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../store'
-import { User } from '../store/common'
-import { setUser, logout } from '../store/common'
-import { useCallback } from 'react'
+import { User, setUser, logout } from '../store/common'
 
 export default function useUser() {
   const user = useSelector((state: RootState) => state.common.user)

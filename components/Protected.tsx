@@ -1,12 +1,12 @@
 import * as React from 'react'
 import Head from 'next/head'
 import Router from 'next/router'
-import useUser from '../hooks/useUser'
+import useAuth from '../hooks/useAuth'
 
 const LOGIN_URL = '/login'
 
 const Protected: React.SFC = ({ children }) => {
-  const { user } = useUser()
+  const { user } = useAuth()
 
   if (user) {
     return <>{children}</>
