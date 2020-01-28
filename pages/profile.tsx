@@ -1,13 +1,10 @@
-import { NextPage } from 'next'
-import { auth } from '../lib/auth'
+import { NextPage, NextPageContext } from 'next'
+import { withAuth } from '../lib/auth'
 
-const Profile: NextPage = () => (
-  <div>Profile page</div>
-)
-
-Profile.getInitialProps = ctx => {
-  const token = auth(ctx)
-  return { token }
+const Profile: NextPage = () => {
+  return (
+    <div>Profile page</div>
+  )
 }
 
-export default Profile
+export default withAuth(Profile)
