@@ -1,10 +1,12 @@
-import { NextPage, NextPageContext } from 'next'
-import { withAuth } from '../lib/auth'
+import { NextPage } from 'next'
+import Layout from '../components/layouts/Main'
 
 const Profile: NextPage = () => {
   return (
-    <div>Profile page</div>
+    <Layout>
+      <div>Profile page</div>
+    </Layout>
   )
 }
 
-export default withAuth(Profile)
+export default Profile
