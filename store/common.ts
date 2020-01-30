@@ -6,7 +6,7 @@ export type User = {
 }
 
 type UserState = {
-  user?: User | null
+  user: User | null
 }
 
 type CommonState = UserState
@@ -20,7 +20,7 @@ const initialState: CommonState = {
 
 const SET_USER = 'user/SET_USER' as const
 
-export const setUser = (user?: User) => ({ type: SET_USER, payload: user })
+export const setUser = (user: User | null) => ({ type: SET_USER, payload: user })
 export const logout = () => ({ type: SET_USER, payload: null })
 
 type UserAction = ReturnType<typeof setUser> | ReturnType<typeof logout>
