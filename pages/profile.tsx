@@ -1,5 +1,5 @@
 import { NextPage } from 'next'
-import Layout from '../components/layouts/Main'
+import Layout from '@components/layouts/main'
 
 const Profile: NextPage = () => {
   return (

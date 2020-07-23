@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import Protected from '../Protected'
-import Header from '../Header'
+import Header from '@components/header'
+import Protected from '@components/protected'
 
 const Container = styled.div`
   width: 100%;
