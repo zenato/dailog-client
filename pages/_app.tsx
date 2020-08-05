@@ -1,20 +1,26 @@
-import { AppProps, AppContext } from 'next/app'
-import ApolloClient from 'apollo-boost'
-import { ApolloProvider } from '@apollo/react-hooks'
+import dayjs from 'dayjs'
+import weekday from 'dayjs/plugin/weekday'
 import axios from 'axios'
-import { wrapper } from '@store/index'
-import { getInitialState } from '@store/index'
+import { AppProps, AppContext } from 'next/app'
+import Head from 'next/head'
+import { wrapper, getInitialState } from '@store/index'
 
-import '../styles.css'
+import '@assets/main.css'
 
-const client = new ApolloClient({ uri: '/graphql' })
+dayjs.extend(weekday)
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props
   return (
-    <ApolloProvider client={client}>
+    <>
+      <Head>
+        <meta
+          name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"
+        />
+      </Head>
       <Component {...pageProps} />
-    </ApolloProvider>
+    </>
   )
 }
 
@@ -24,9 +30,6 @@ App.getInitialProps = async ({ Component, ctx }: AppContext) => {
     baseURL: process.env.API_URL || '',
     headers: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined,
   })
-
-  // Apollo Client
-  ctx.apolloClient = client
 
   // initialize on server
   if (ctx.req) {

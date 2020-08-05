@@ -5,6 +5,7 @@ export type User = {
   id: number
   email: string
   name: string
+  profileImage?: string
 }
 
 export type UserState = User | null

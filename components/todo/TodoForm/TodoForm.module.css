@@ -1,0 +1,76 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+.root.active {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+.addButton {
+  margin-bottom: 1rem;
+  height: 3rem;
+  width: 3rem;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  background-color: rgb(3%, 52.3%, 99.1%);
+  color: #fff;
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+.addButton.close {
+  background-color: rgb(99.1%, 20.6%, 3%);
+  transform: rotate(45deg);
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.titleInput {
+  flex-grow: 1;
+  height: 2.3rem;
+  font-size: 1.3rem;
+  padding-left: 0.7rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+.titleInput:focus {
+  border-color: #777;
+}
+.titleInput::placeholder {
+  color: #eee;
+}
+
+.submitButton {
+  height: 2.5rem;
+  margin-left: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-size: 1.3rem;
+  color: #fff;
+  background-color: rgb(3%, 41%, 99.1%);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.error {
+  margin-top: 0.3rem;
+  padding-left: 0.3rem;
+  color: rgb(98%, 1%, 1%);
+  width: 100%;
+}

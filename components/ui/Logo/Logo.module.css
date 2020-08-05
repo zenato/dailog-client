@@ -1,0 +1,9 @@
+.root {
+  font-size: 3rem;
+  font-family: 'Lobster', cursive;
+}
+
+.root a {
+  color: rgb(33, 37, 41);
+  text-decoration: none;
+}

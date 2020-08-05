@@ -1,0 +1,25 @@
+.root {
+  width: 100%;
+  margin-top: 1rem;
+  border-top: solid 1px #ddd;
+  border-bottom: solid 1px #ddd;
+  border-collapse: collapse;
+}
+
+.weekday {
+  height: 3rem;
+  padding: 0.35rem;
+  font-size: 1.3rem;
+  opacity: 0.7;
+}
+.weekday.sun {
+  color: #fe3434;
+}
+.weekday.sat {
+  color: #1d72ff;
+}
+
+.day {
+  border-top: solid 1px #ddd;
+  height: 6rem;
+}
