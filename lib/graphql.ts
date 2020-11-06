@@ -6,8 +6,8 @@ export interface Todo {
 }
 
 export const TodosByMonthly = `
-  query TodosByMonthly($year: Int!, $month: Int!) {
-    todosByMonthly(year: $year, month: $month) {
+  query TodosByMonthly($date: Date!) {
+    todosByMonthly(date: $date) {
       id
       date
       title

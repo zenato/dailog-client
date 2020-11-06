@@ -27,7 +27,7 @@ const TodoDetail = () => {
     await mutate(fetchKey)
   }
 
-  const { data, error } = useSWR(fetchKey, async (query, date) => {
+  const { data, error } = useSWR(fetchKey, async (query) => {
     const { todosByDate } = await gql('/api/graphql', query, { date })
     return todosByDate
   })
