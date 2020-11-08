@@ -14,3 +14,9 @@ This project is currently **under development**.
 2. Run `yarn install`.
 3. Run `yarn dev`.
   
+## Deployment
+
+Not support AWS because of limitation of *[Serverless Component]*(https://github.com/serverless-nextjs/serverless-next.js#features).
+
+Use the *Vercel platform*.
+Run `vercel`.
