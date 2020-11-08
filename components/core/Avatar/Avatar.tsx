@@ -8,7 +8,11 @@ interface Props {
 }
 
 const Avatar: FC<Props> = ({ profileImage }) => {
-  return <Image unsized className={cn(s.root)} src={profileImage || '/profile.png'}></Image>
+  return (
+    <div className={cn(s.root)}>
+      <Image width="100%" height="100%" src={profileImage || '/profile.png'}></Image>
+    </div>
+  )
 }
 
 export default Avatar
