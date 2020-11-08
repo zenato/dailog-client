@@ -7,6 +7,7 @@ This project is currently **under development**.
 - SWR
 - GraphQL
 - Authentication with Google OAuth
+- Serverless
 
 ## Getting started
 1. Run [Dailog Server](https://github.com/zenato/dailog-server).

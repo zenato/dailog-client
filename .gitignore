@@ -1,12 +1,19 @@
+# Logs
 *.log
 
+# Pacakge directories
 node_modules
-.next
-dist
 
+# Output directories
+.next
+.serverless
+.serverless_nextjs
+
+# IDE
 .idea
 .vscode
 
-.env
-.env.development
-.env.production
+# Environment
+.env*.local
+
+.vercel
