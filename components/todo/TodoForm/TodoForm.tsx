@@ -1,6 +1,4 @@
 import { useState, FunctionComponent, SyntheticEvent } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faExclamationCircle, faPen } from '@fortawesome/free-solid-svg-icons'
 import cn from 'classnames'
 import { Input } from '@components/ui'
 import s from './TodoForm.module.css'
@@ -42,7 +40,7 @@ const Form: FunctionComponent<Props> = ({ onSubmit }) => {
   return (
     <div className={cn(s.root, { [s.active]: display })}>
       <button className={cn(s.addButton, { [s.close]: display })} onClick={toggleDisplay}>
-        {<FontAwesomeIcon size="2x" icon={faPlus} />}
+        <img width="100%" height="100%" src={display ? '/todo-close.svg' : '/todo-add.svg'} />
       </button>
       {display && (
         <div className={cn(s.formContainer)}>
@@ -56,14 +54,10 @@ const Form: FunctionComponent<Props> = ({ onSubmit }) => {
               autoFocus
             />
             <button type="submit" className={cn(s.submitButton)}>
-              <FontAwesomeIcon icon={faPen} />
+              Add
             </button>
           </form>
-          {error && (
-            <div className={cn(s.error)}>
-              <FontAwesomeIcon icon={faExclamationCircle} /> {error}
-            </div>
-          )}
+          {error && <div className={cn(s.error)}>! {error}</div>}
         </div>
       )}
     </div>

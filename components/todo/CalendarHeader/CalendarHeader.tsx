@@ -2,8 +2,6 @@ import { FC } from 'react'
 import { useRouter } from 'next/router'
 import dayjs from 'dayjs'
 import cn from 'classnames'
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import s from './CalendarHeader.module.css'
 
 interface Props {
@@ -26,11 +24,11 @@ const Date: FC<Props> = ({ date }) => {
   return (
     <div className={cn(s.root)}>
       <button className={cn(s.prev)} onClick={handlePrev}>
-        <FontAwesomeIcon size="lg" icon={faChevronLeft} />
+        <img width="18" height="18" src="/left-arrow.svg" />
       </button>
       <div className={cn(s.state)}>{dayjs(date).format('YYYY / MM')}</div>
       <button className={cn(s.next)} onClick={handleNext}>
-        <FontAwesomeIcon size="lg" icon={faChevronRight} />
+        <img width="18" height="18" src="/right-arrow.svg" />
       </button>
     </div>
   )

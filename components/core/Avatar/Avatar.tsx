@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import Image from 'next/image'
 import cn from 'classnames'
 import s from './Avatar.module.css'
 
@@ -8,7 +7,11 @@ interface Props {
 }
 
 const Avatar: FC<Props> = ({ profileImage }) => {
-  return <Image unsized className={cn(s.root)} src={profileImage || '/profile.png'}></Image>
+  return (
+    <div className={cn(s.root)}>
+      <img width="100%" height="100%" src={profileImage || '/profile.png'}></img>
+    </div>
+  )
 }
 
 export default Avatar

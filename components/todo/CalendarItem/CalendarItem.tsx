@@ -16,8 +16,6 @@ const CalendarItem: FC<Props> = ({ day, todos }) => {
     return {
       [s.sun]: day.date.getDay() === 0,
       [s.sat]: day.date.getDay() === 6,
-      [s.completed]: todos?.every((i) => i.isDone) ?? false,
-      [s.incompleted]: todos?.some((i) => !i.isDone) ?? false,
       [s.disabled]: !day.isCurrentMonth,
     }
   }, [day, todos])
@@ -29,6 +27,17 @@ const CalendarItem: FC<Props> = ({ day, todos }) => {
           <a className={cn(s.link)}>{day.date.getDate()}</a>
         </Link>
       </div>
+      {todos?.every((i) => i.isDone) && (
+        <img width="60%" height="60%" src="/calendar-completed.svg" className={cn(s.completed)} />
+      )}
+      {todos?.some((i) => !i.isDone) && (
+        <img
+          width="50%"
+          height="50%"
+          src="/calendar-incompleted.svg"
+          className={cn(s.incompleted)}
+        />
+      )}
     </div>
   )
 }

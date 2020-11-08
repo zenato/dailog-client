@@ -1,7 +1,5 @@
 import { FC } from 'react'
 import { useRouter } from 'next/router'
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import cn from 'classnames'
 import dayjs from 'dayjs'
 import s from './TodoHeader.module.css'
@@ -15,7 +13,7 @@ const TodoHeader: FC<Props> = ({ date }) => {
   return (
     <div className={cn(s.root)}>
       <button className={cn(s.backButton)} onClick={() => router.back()}>
-        <FontAwesomeIcon size="lg" icon={faChevronLeft} />
+        <img width="18" height="18" src="/left-arrow.svg" />
       </button>
       <span>{dayjs(date).format('YYYY / MM / DD')}</span>
     </div>

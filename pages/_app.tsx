@@ -18,6 +18,7 @@ const App = (props: AppProps) => {
           name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"
         />
+        <link rel="preload" href="/api/auth/me" as="fetch" crossOrigin="anonymous"></link>
       </Head>
       <Component {...pageProps} />
     </>

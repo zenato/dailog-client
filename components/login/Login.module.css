@@ -24,11 +24,16 @@
 }
 
 .googleButton {
-  background-color: rgb(99.1%, 20.6%, 3%);
+  display: flex;
+  background-color: rgb(99.1%, 35.8%, 21.6%);
   color: #fff;
   font-size: 1rem;
   padding: 0.5rem;
   border: 0;
   border-radius: 0.3rem;
   cursor: pointer;
+}
+
+.googleButton .googleIcon {
+  margin-right: 0.5rem;
 }
