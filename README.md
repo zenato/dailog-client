@@ -16,7 +16,7 @@ This project is currently **under development**.
   
 ## Deployment
 
-Not support AWS because of limitation of *[Serverless Component]*(https://github.com/serverless-nextjs/serverless-next.js#features).
+Not support AWS because of limitation of [Serverless Component](https://github.com/serverless-nextjs/serverless-next.js#features).
 
 Use the *Vercel platform*.
 Run `vercel`.
