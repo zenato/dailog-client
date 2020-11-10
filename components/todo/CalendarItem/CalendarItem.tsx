@@ -24,12 +24,18 @@ const CalendarItem: FC<Props> = ({ day, todos }) => {
   return (
     <div className={cn(s.root, className)}>
       <div className={cn(s.content)}>
-        <Link href={`/todo/${dayjs(day.date).format('YYYYMMDD')}`}>
-          <a className={cn(s.link)}>{day.date.getDate()}</a>
-        </Link>
+        {day.isCurrentMonth ? (
+          <>
+            <Link href={`/todo/${dayjs(day.date).format('YYYYMMDD')}`}>
+              <a className={cn(s.day)}>{day.date.getDate()}</a>
+            </Link>
+            {todos?.every((i) => i.isDone) && <CalendarCompleted className={cn(s.completed)} />}
+            {todos?.some((i) => !i.isDone) && <CalendarIncompleted className={cn(s.incompleted)} />}
+          </>
+        ) : (
+          <div className={cn(s.day)}>{day.date.getDate()}</div>
+        )}
       </div>
-      {todos?.every((i) => i.isDone) && <CalendarCompleted className={cn(s.completed)} />}
-      {todos?.some((i) => !i.isDone) && <CalendarIncompleted className={cn(s.incompleted)} />}
     </div>
   )
 }
