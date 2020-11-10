@@ -31,19 +31,27 @@
   width: 2.5rem;
   height: 2.5rem;
   text-align: center;
-  /* border: 1px solid #eee; */
   border: 0;
-  /* border-radius: 50%; */
+  padding: 0;
   background-color: #fff;
-  /* color: #999; */
   cursor: pointer;
 }
 
+.doneButton svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .deleteButton {
-  /* color: rgb(99.1%, 20.6%, 3%); */
   width: 2.5rem;
   height: 2.5rem;
   border: 0;
+  padding: 0;
   background-color: #fff;
   cursor: pointer;
+}
+
+.deleteButton svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }

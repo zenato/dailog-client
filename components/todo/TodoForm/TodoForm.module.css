@@ -7,15 +7,11 @@
   border-top: 1px solid #eee;
   padding-top: 1rem;
 }
-.root.active {
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #eee;
-}
 
 .addButton {
-  margin-bottom: 1rem;
-  height: 3rem;
-  width: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
   border: 0;
   background-color: #fff;
   transition: all ease 0.3s;
@@ -25,10 +21,17 @@
   transform: rotate(-90deg);
 }
 
+.addButton svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
 .formContainer {
   display: flex;
   flex-direction: column;
   width: 100%;
+  border-bottom: 1px solid #eee;
+  padding: 1.3rem 0 1.3rem 0;
 }
 
 .form {

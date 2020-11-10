@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import dayjs from 'dayjs'
 import cn from 'classnames'
 import s from './CalendarHeader.module.css'
+import { LeftArrow, RightArrow } from '@components/icons'
 
 interface Props {
   date: Date
@@ -24,11 +25,11 @@ const Date: FC<Props> = ({ date }) => {
   return (
     <div className={cn(s.root)}>
       <button className={cn(s.prev)} onClick={handlePrev}>
-        <img width="18" height="18" src="/left-arrow.svg" />
+        <LeftArrow />
       </button>
       <div className={cn(s.state)}>{dayjs(date).format('YYYY / MM')}</div>
       <button className={cn(s.next)} onClick={handleNext}>
-        <img width="18" height="18" src="/right-arrow.svg" />
+        <RightArrow />
       </button>
     </div>
   )

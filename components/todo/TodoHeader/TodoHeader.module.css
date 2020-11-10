@@ -7,9 +7,15 @@
 }
 
 .backButton {
-  padding: 0.3rem;
+  padding: 0;
   border: 0;
   background-color: #fff;
   color: rgb(99.1%, 20.6%, 3%);
   cursor: pointer;
+}
+
+.backButton svg {
+  margin: 0.2rem 0.5rem 0 0;
+  width: 1.3rem;
+  height: 1.3rem;
 }

@@ -6,19 +6,29 @@
 }
 
 .prev {
-  padding: 0.3rem;
   border: 0;
+  padding: 0;
   background-color: #fff;
-  color: rgb(99.1%, 20.6%, 3%);
   cursor: pointer;
 }
 
+.prev svg {
+  margin: 0.2rem 0.5rem 0 0;
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
 .next {
-  padding: 0.3rem;
   border: 0;
+  padding: 0;
   background-color: #fff;
-  color: rgb(99.1%, 20.6%, 3%);
   cursor: pointer;
+}
+
+.next svg {
+  margin: 0.2rem 0 0 0.5rem;
+  width: 1.3rem;
+  height: 1.3rem;
 }
 
 .state {

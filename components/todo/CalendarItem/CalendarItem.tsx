@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 import { Item } from '@lib/calendar'
 import { Todo } from '@lib/graphql'
 import s from './CalendarItem.module.css'
+import { CalendarCompleted, CalendarIncompleted } from '@components/icons'
 
 interface Props {
   day: Item
@@ -27,17 +28,8 @@ const CalendarItem: FC<Props> = ({ day, todos }) => {
           <a className={cn(s.link)}>{day.date.getDate()}</a>
         </Link>
       </div>
-      {todos?.every((i) => i.isDone) && (
-        <img width="60%" height="60%" src="/calendar-completed.svg" className={cn(s.completed)} />
-      )}
-      {todos?.some((i) => !i.isDone) && (
-        <img
-          width="50%"
-          height="50%"
-          src="/calendar-incompleted.svg"
-          className={cn(s.incompleted)}
-        />
-      )}
+      {todos?.every((i) => i.isDone) && <CalendarCompleted className={cn(s.completed)} />}
+      {todos?.some((i) => !i.isDone) && <CalendarIncompleted className={cn(s.incompleted)} />}
     </div>
   )
 }

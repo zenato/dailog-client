@@ -2,6 +2,7 @@ import { useState, FunctionComponent, SyntheticEvent } from 'react'
 import cn from 'classnames'
 import { Input } from '@components/ui'
 import s from './TodoForm.module.css'
+import { TodoAddIcon, TodoCloseIcon } from '@components/icons'
 
 interface Props {
   onSubmit: (title: string) => Promise<any>
@@ -38,9 +39,9 @@ const Form: FunctionComponent<Props> = ({ onSubmit }) => {
   }
 
   return (
-    <div className={cn(s.root, { [s.active]: display })}>
+    <div className={cn(s.root)}>
       <button className={cn(s.addButton, { [s.close]: display })} onClick={toggleDisplay}>
-        <img width="100%" height="100%" src={display ? '/todo-close.svg' : '/todo-add.svg'} />
+        {display ? <TodoCloseIcon /> : <TodoAddIcon />}
       </button>
       {display && (
         <div className={cn(s.formContainer)}>

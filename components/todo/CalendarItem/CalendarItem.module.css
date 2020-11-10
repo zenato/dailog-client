@@ -17,15 +17,19 @@
 .completed {
   z-index: -999;
   position: absolute;
-  top: 20%;
-  left: 20%;
+  top: calc(50% - 1.25rem);
+  left: calc(50% - 1.25rem);
+  width: 2.5rem;
+  height: 2.5rem;
   opacity: 0.2;
 }
 .incompleted {
   z-index: -999;
   position: absolute;
-  top: 25%;
-  left: 25%;
+  top: calc(50% - 1rem);
+  left: calc(50% - 1rem);
+  width: 2rem;
+  height: 2rem;
   opacity: 0.2;
 }
 

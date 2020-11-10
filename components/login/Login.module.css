@@ -20,7 +20,7 @@
 }
 
 .buttons {
-  margin-top: 1rem;
+  padding: 1rem;
 }
 
 .googleButton {
@@ -34,6 +34,11 @@
   cursor: pointer;
 }
 
-.googleButton .googleIcon {
-  margin-right: 0.5rem;
+.googleButton svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.googleButton span {
+  margin-left: 0.5rem;
 }

@@ -2,6 +2,7 @@ import cn from 'classnames'
 import { FC } from 'react'
 import { Todo } from '@lib/graphql'
 import s from './TodoList.module.css'
+import { TodoCompletedIcon, TodoIncompletedIcon, TodoDeleteIcon } from '@components/icons'
 
 interface Props {
   items: [Todo]
@@ -21,15 +22,11 @@ const TodoList: FC<Props> = ({ items, error, onClickDone, onClickDelete }) => {
       {items.map((item) => (
         <div key={item.id} className={cn(s.item)}>
           <button className={cn(s.doneButton)} onClick={handleUpdate(item)}>
-            <img
-              width="100%"
-              height="100%"
-              src={item.isDone ? '/todo-completed.svg' : '/todo-incompleted.svg'}
-            />
+            {item.isDone ? <TodoCompletedIcon /> : <TodoIncompletedIcon />}
           </button>
           <span className={cn(s.title, { [s.done]: item.isDone })}>{item.title}</span>
           <button className={cn(s.deleteButton)} onClick={handleDelete(item)}>
-            <img width="100%" height="100%" src="/todo-delete.svg" />
+            <TodoDeleteIcon />
           </button>
         </div>
       ))}
