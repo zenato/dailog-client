@@ -1,3 +1,4 @@
+export { default as AlertIcon } from './alert.svg'
 export { default as GoogleIcon } from './google.svg'
 export { default as CalendarCompleted } from './calendar-completed.svg'
 export { default as CalendarIncompleted } from './calendar-incompleted.svg'

@@ -69,8 +69,17 @@
 }
 
 .error {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin-top: 0.3rem;
   padding-left: 0.3rem;
   color: rgb(98%, 1%, 1%);
   width: 100%;
+}
+
+.error svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-right: 0.3rem;
 }

@@ -2,7 +2,7 @@ import { useState, FunctionComponent, SyntheticEvent } from 'react'
 import cn from 'classnames'
 import { Input } from '@components/ui'
 import s from './TodoForm.module.css'
-import { TodoAddIcon, TodoCloseIcon } from '@components/icons'
+import { AlertIcon, TodoAddIcon, TodoCloseIcon } from '@components/icons'
 
 interface Props {
   onSubmit: (title: string) => Promise<any>
@@ -58,7 +58,11 @@ const Form: FunctionComponent<Props> = ({ onSubmit }) => {
               Add
             </button>
           </form>
-          {error && <div className={cn(s.error)}>! {error}</div>}
+          {error && (
+            <div className={cn(s.error)}>
+              <AlertIcon /> {error}
+            </div>
+          )}
         </div>
       )}
     </div>
