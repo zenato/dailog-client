@@ -28,30 +28,12 @@
 }
 
 .doneButton {
-  width: 2.5rem;
-  height: 2.5rem;
-  text-align: center;
-  border: 0;
-  padding: 0;
-  background-color: #fff;
-  cursor: pointer;
-}
-
-.doneButton svg {
   width: 1.5rem;
   height: 1.5rem;
+  text-align: center;
 }
 
 .deleteButton {
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 0;
-  padding: 0;
-  background-color: #fff;
-  cursor: pointer;
-}
-
-.deleteButton svg {
   width: 1.5rem;
   height: 1.5rem;
 }

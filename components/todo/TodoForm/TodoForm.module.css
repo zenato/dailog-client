@@ -11,19 +11,10 @@
 .addButton {
   width: 2.5rem;
   height: 2.5rem;
-  padding: 0;
-  border: 0;
-  background-color: #fff;
   transition: all ease 0.3s;
-  cursor: pointer;
 }
 .addButton.close {
   transform: rotate(-90deg);
-}
-
-.addButton svg {
-  width: 2.5rem;
-  height: 2.5rem;
 }
 
 .formContainer {

@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import cn from 'classnames'
 import s from './CalendarHeader.module.css'
 import { LeftArrow, RightArrow } from '@components/icons'
+import { IconButton } from '@components/ui'
 
 interface Props {
   date: Date
@@ -24,13 +25,9 @@ const Date: FC<Props> = ({ date }) => {
 
   return (
     <div className={cn(s.root)}>
-      <button className={cn(s.prev)} onClick={handlePrev}>
-        <LeftArrow />
-      </button>
+      <IconButton icon={LeftArrow} className={cn(s.prev)} onClick={handlePrev} />
       <div className={cn(s.state)}>{dayjs(date).format('YYYY / MM')}</div>
-      <button className={cn(s.next)} onClick={handleNext}>
-        <RightArrow />
-      </button>
+      <IconButton icon={RightArrow} className={cn(s.next)} onClick={handleNext} />
     </div>
   )
 }

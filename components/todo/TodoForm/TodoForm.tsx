@@ -3,6 +3,7 @@ import cn from 'classnames'
 import { Input } from '@components/ui'
 import s from './TodoForm.module.css'
 import { AlertIcon, TodoAddIcon, TodoCloseIcon } from '@components/icons'
+import { IconButton } from '@components/ui'
 
 interface Props {
   onSubmit: (title: string) => Promise<any>
@@ -40,9 +41,11 @@ const Form: FunctionComponent<Props> = ({ onSubmit }) => {
 
   return (
     <div className={cn(s.root)}>
-      <button className={cn(s.addButton, { [s.close]: display })} onClick={toggleDisplay}>
-        {display ? <TodoCloseIcon /> : <TodoAddIcon />}
-      </button>
+      <IconButton
+        icon={display ? TodoCloseIcon : TodoAddIcon}
+        className={cn(s.addButton, { [s.close]: display })}
+        onClick={toggleDisplay}
+      />
       {display && (
         <div className={cn(s.formContainer)}>
           <form className={cn(s.form)} onSubmit={handleSubmit}>
