@@ -4,7 +4,7 @@ import Cookie from 'js-cookie'
 import { RootState } from '@store/index'
 import { User, actions } from '@store/user'
 
-export default function useAuth() {
+const useAuth = () => {
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
 
@@ -22,3 +22,5 @@ export default function useAuth() {
     logout,
   }
 }
+
+export default useAuth

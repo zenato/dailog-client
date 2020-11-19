@@ -2,9 +2,8 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import dayjs from 'dayjs'
-import Layout from '@components/core/Layout/Layout'
-import Header from '@components/todo/CalendarHeader/CalendarHeader'
-import Calendar from '@components/todo/Calendar/Calendar'
+import { Layout } from '@components/core'
+import { CalendarHeader, Calendar } from '@components/todo'
 import { TodosByMonthly, Todo } from '@lib/graphql'
 import { gql } from '@lib/fetcher'
 
@@ -26,7 +25,7 @@ const HomePage: NextPage = () => {
 
   return (
     <Layout>
-      <Header date={currentDate} />
+      <CalendarHeader date={currentDate} />
       <Calendar date={currentDate} todos={items} error={error} />
     </Layout>
   )

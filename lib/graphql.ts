@@ -1,3 +1,8 @@
+export interface User {
+  id: number
+  name: string
+  thumbnail?: string
+}
 export interface Todo {
   id: number
   title: string
@@ -49,5 +54,23 @@ export const UpdateTodo = `
 export const DeleteTodo = `
   mutation DeleteTodo($id: ID!) {
     deleteTodo(id: $id)
+  }
+`
+
+export const UpdateThumbnail = `
+  mutation UpdateThumbnail($url: String) {
+    updateThumbnail(url: $url) {
+      id
+      name
+    }
+  }
+`
+
+export const UpdateProfileName = `
+  mutation UpdateProfileName($name: String!) {
+    updateProfileName(name: $name) {
+      id
+      name
+    }
   }
 `

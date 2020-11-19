@@ -26,7 +26,7 @@ const Header: FC = () => {
         <Logo />
         <div>
           <a href="" onClick={handleDisplayModal}>
-            <Avatar profileImage={user?.profileImage} />
+            <Avatar profileImage={user?.thumbnail} />
           </a>
           {displayModal && <Modal onClickItem={handleClickItem} />}
         </div>

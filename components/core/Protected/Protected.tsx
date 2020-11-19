@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import Router from 'next/router'
 import useSWR from 'swr'
-import useAuth from '@lib/auth'
+import { useAuth } from '@lib/hooks'
 import fetcher from '@lib/fetcher'
 
 const LOGIN_URL = '/login'

@@ -1,0 +1,114 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  display: flex;
+  flex-direction: row;
+}
+
+.thumbnailContainer {
+  display: flex;
+  flex-direction: column;
+  padding-right: 3rem;
+  border-right: 1px solid #ccc;
+  margin-right: 2rem;
+}
+
+.thumbnailContainer .thumbnail {
+  width: 7rem;
+  margin-bottom: 1rem;
+}
+
+.thumbnailContainer .addButton {
+  padding: 0.4rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #007bfe;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.thumbnailContainer .addButton:hover {
+  color: #fff;
+  background-color: #409cfd;
+}
+
+.thumbnailContainer .deleteButton {
+  padding: 0.4rem;
+  border: 0;
+  border-radius: 4px;
+  color: #e65142;
+  background: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.thumbnailContainer .deleteButton:hover {
+  color: #fff;
+  background-color: #e65142;
+}
+
+.nameContainer {
+  display: block;
+  flex: 1 1 0%;
+}
+
+.nameContainer .name {
+  margin: 0;
+  margin-bottom: 0.7rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.nameContainer .updateButton {
+  padding: 0.4rem;
+  border: 0;
+  color: #007bfe;
+  background: none;
+  font-size: 1rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.nameContainer .updateButton:hover {
+  color: #409cfd;
+}
+
+.nameUpdateForm {
+  display: block;
+  box-sizing: inherit;
+}
+
+.nameUpdateForm .nameInput {
+  width: 100%;
+  padding: 0.4rem 1rem;
+  color: #525252;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.nameUpdateForm .nameSubmitContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.nameUpdateForm .nameSubmitContainer .nameSubmit {
+  padding: 0.4rem 1.3rem;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #007bf3;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nameUpdateForm .nameSubmitContainer .nameSubmit:hover {
+  background-color: #409cfd;
+}
