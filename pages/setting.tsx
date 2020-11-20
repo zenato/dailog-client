@@ -35,6 +35,7 @@ const Setting: NextPage = () => {
 
   return (
     <Layout>
+      {!data && <div>Loading...</div>}
       {data && (
         <SettingForm
           user={data.user}
