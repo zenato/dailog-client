@@ -1,10 +1,11 @@
 export interface User {
-  id: number
+  id: string
   name: string
+  email: string
   thumbnail?: string
 }
 export interface Todo {
-  id: number
+  id: string
   title: string
   date: Date
   isDone: boolean

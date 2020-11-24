@@ -1,12 +1,6 @@
 import { HYDRATE } from 'next-redux-wrapper'
 import { createAction, createReducer, ActionType } from 'typesafe-actions'
-
-export type User = {
-  id: number
-  email: string
-  name: string
-  thumbnail?: string
-}
+import { User } from '@lib/graphql'
 
 export type UserState = User | null
 

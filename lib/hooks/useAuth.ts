@@ -2,7 +2,8 @@ import { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Cookie from 'js-cookie'
 import { RootState } from '@store/index'
-import { User, actions } from '@store/user'
+import { actions } from '@store/user'
+import { User } from '@lib/graphql'
 
 const useAuth = () => {
   const user = useSelector((state: RootState) => state.user)
