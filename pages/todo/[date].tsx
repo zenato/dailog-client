@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { gql, quries } from '@lib/api'
 import getServerSidePropsWrapper from '@lib/ssr'
 import { Layout } from '@components/core'
-import { TodoHeader, TodoForm, TodoList } from '@components/todo'
+import { TodoForm, TodoHeader, TodoList } from '@components/todo'
 
 interface Props {
   todosByDate: [Todo]

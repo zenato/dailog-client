@@ -1,6 +1,5 @@
-import { NextPage } from 'next'
 import useSWR, { mutate } from 'swr'
-import { useAuth, useUpload, useS3Upload } from '@lib/hooks'
+import { useAuth, useS3Upload, useUpload } from '@lib/hooks'
 import { fetcher, gql, quries } from '@lib/api'
 import getServerSidePropsWrapper from '@lib/ssr'
 import { Layout } from '@components/core'

@@ -2,15 +2,14 @@ import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import dayjs from 'dayjs'
 import { Layout } from '@components/core'
-import { CalendarHeader, Calendar } from '@components/todo'
+import { Calendar, CalendarHeader } from '@components/todo'
 import getServerSidePropsWrapper from '@lib/ssr'
 import { gql, quries } from '@lib/api'
 
 const DATE_FORMAT = 'YYYYMM'
 
 function getStartOfMonth(date: string) {
-  const startDate = (date ? dayjs(date as string, DATE_FORMAT) : dayjs()).startOf('month').toDate()
-  return startDate
+  return (date ? dayjs(date as string, DATE_FORMAT) : dayjs()).startOf('month').toDate()
 }
 
 interface Props {

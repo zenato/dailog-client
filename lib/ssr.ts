@@ -38,8 +38,8 @@ const getServerSidePropsWrapper: GetServerSidePropsWrapper = (callback) =>
             permanent: false,
           },
         }
-        throw e
       }
+      throw e
     }
   })
 

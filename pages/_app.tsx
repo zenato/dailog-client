@@ -1,7 +1,6 @@
 import dayjs from 'dayjs'
 import weekday from 'dayjs/plugin/weekday'
-import axios from 'axios'
-import { AppProps, AppContext } from 'next/app'
+import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { wrapper } from '@store/index'
 

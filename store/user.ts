@@ -1,5 +1,5 @@
 import { HYDRATE } from 'next-redux-wrapper'
-import { createAction, createReducer, ActionType } from 'typesafe-actions'
+import { ActionType, createAction, createReducer } from 'typesafe-actions'
 
 export type UserState = User | null
 
