@@ -1,6 +1,5 @@
 import cn from 'classnames'
 import { FC } from 'react'
-import { Todo } from '@lib/graphql'
 import s from './TodoList.module.css'
 import { TodoCompletedIcon, TodoIncompletedIcon, TodoDeleteIcon } from '@components/icons'
 import { IconButton } from '@components/ui'

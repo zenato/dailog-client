@@ -3,7 +3,6 @@ import Link from 'next/link'
 import cn from 'classnames'
 import dayjs from 'dayjs'
 import { Item } from '@lib/calendar'
-import { Todo } from '@lib/graphql'
 import s from './CalendarItem.module.css'
 import { CalendarCompleted, CalendarIncompleted } from '@components/icons'
 

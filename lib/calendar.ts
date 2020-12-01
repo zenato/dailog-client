@@ -5,7 +5,7 @@ export interface Item {
   isCurrentMonth: boolean
 }
 
-export function getDays (param: Date) {
+export function getDays(param: Date) {
   const date = dayjs(param).startOf('month')
   const lastValue = date.endOf('month').valueOf()
   let current = dayjs(date).add(-date.weekday(), 'day')

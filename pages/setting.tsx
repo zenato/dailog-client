@@ -1,14 +1,21 @@
 import { NextPage } from 'next'
 import useSWR, { mutate } from 'swr'
-import fetcher from '@lib/fetcher'
+import { useAuth, useUpload, useS3Upload } from '@lib/hooks'
+import { fetcher, gql, quries } from '@lib/api'
+import getServerSidePropsWrapper from '@lib/ssr'
 import { Layout } from '@components/core'
 import { Setting as SettingForm } from '@components/setting'
-import { useUpload, useS3Upload } from '@lib/hooks'
-import { UpdateThumbnail, UpdateProfileName } from '@lib/graphql'
-import { gql } from '@lib/fetcher'
 
-const Setting: NextPage = () => {
-  const { data, error } = useSWR('/api/auth/me', fetcher)
+interface Props {
+  user: User
+}
+
+export default function Setting(props: Props) {
+  const { setUser } = useAuth()
+  const { data } = useSWR('/auth/me', fetcher, {
+    initialData: { user: props.user },
+    onSuccess: ({ user }) => setUser(user),
+  })
   const [upload] = useUpload()
   const [s3Upload] = useS3Upload()
 
@@ -19,26 +26,28 @@ const Setting: NextPage = () => {
     const image = await s3Upload(file, { type: 'profile' })
     if (!image) return
 
-    await gql('/api/graphql', UpdateThumbnail, { url: image })
-    mutate('/api/auth/me')
+    await gql(quries.UpdateThumbnail, { url: image })
+    mutate('/auth/me')
   }
 
   const deleteThumbnail = async () => {
-    await gql('/api/graphql', UpdateThumbnail, { url: null })
-    mutate('/api/auth/me')
+    await gql(quries.UpdateThumbnail, { url: null })
+    mutate('/auth/me')
   }
 
   const saveName = async (name: string) => {
-    await gql('/api/graphql', UpdateProfileName, { name })
-    mutate('/api/auth/me')
+    await gql(quries.UpdateProfileName, { name })
+    mutate('/auth/me')
   }
+
+  const user = data?.user
 
   return (
     <Layout>
-      {!data && <div>Loading...</div>}
-      {data && (
+      {!user && <div>Loading...</div>}
+      {user && (
         <SettingForm
-          user={data.user}
+          user={user}
           uploadThumbnail={uploadThumbnail}
           deleteThumbnail={deleteThumbnail}
           saveName={saveName}
@@ -48,4 +57,7 @@ const Setting: NextPage = () => {
   )
 }
 
-export default Setting
+export const getServerSideProps = getServerSidePropsWrapper(async ({ axiosConfig }) => {
+  const { user } = await fetcher('/auth/me', axiosConfig)
+  return { props: { user } }
+})

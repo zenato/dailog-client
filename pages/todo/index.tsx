@@ -1,34 +1,50 @@
-import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import dayjs from 'dayjs'
 import { Layout } from '@components/core'
 import { CalendarHeader, Calendar } from '@components/todo'
-import { TodosByMonthly, Todo } from '@lib/graphql'
-import { gql } from '@lib/fetcher'
+import getServerSidePropsWrapper from '@lib/ssr'
+import { gql, quries } from '@lib/api'
 
 const DATE_FORMAT = 'YYYYMM'
 
-const HomePage: NextPage = () => {
+function getStartOfMonth(date: string) {
+  const startDate = (date ? dayjs(date as string, DATE_FORMAT) : dayjs()).startOf('month').toDate()
+  return startDate
+}
+
+interface Props {
+  todosByMonthly: [Todo]
+}
+
+export default function TodoCalendar({ todosByMonthly }: Props) {
   const router = useRouter()
   const { date } = router.query
 
-  const currentDate = (date ? dayjs(date as string, DATE_FORMAT) : dayjs())
-    .startOf('month')
-    .toDate()
-
-  const { data, error } = useSWR([TodosByMonthly, currentDate.getTime()], async (query) =>
-    gql('/api/graphql', query, { date: currentDate }),
+  const startOfMonth = getStartOfMonth(date as string)
+  const { data, error } = useSWR(
+    [quries.TodosByMonthly, startOfMonth.getTime()],
+    async (query) => gql(query, { date: startOfMonth }),
+    { initialData: { todosByMonthly } },
   )
 
   const items: [Todo] = data?.todosByMonthly ?? []
 
   return (
     <Layout>
-      <CalendarHeader date={currentDate} />
-      <Calendar date={currentDate} todos={items} error={error} />
+      {error && <div>{error.message}</div>}
+      <CalendarHeader date={startOfMonth} />
+      <Calendar date={startOfMonth} todos={items} error={error} />
     </Layout>
   )
 }
 
-export default HomePage
+export const getServerSideProps = getServerSidePropsWrapper(async ({ axiosConfig, query }) => {
+  const currentDate = getStartOfMonth(query.date as string)
+  const { todosByMonthly } = await gql(quries.TodosByMonthly, { date: currentDate }, axiosConfig)
+  return {
+    props: {
+      todosByMonthly,
+    },
+  }
+})

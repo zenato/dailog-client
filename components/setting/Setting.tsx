@@ -1,7 +1,6 @@
 import { FC, useState } from 'react'
 import cn from 'classnames'
 import { Input } from '@components/ui'
-import { User } from '@lib/graphql'
 import s from './Setting.module.css'
 
 interface Props {

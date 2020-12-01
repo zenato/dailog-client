@@ -1,16 +1,3 @@
-export interface User {
-  id: string
-  name: string
-  email: string
-  thumbnail?: string
-}
-export interface Todo {
-  id: string
-  title: string
-  date: Date
-  isDone: boolean
-}
-
 export const TodosByMonthly = `
   query TodosByMonthly($date: Date!) {
     todosByMonthly(date: $date) {

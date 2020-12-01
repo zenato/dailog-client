@@ -1,4 +1,3 @@
-import { NextPageContext } from 'next'
 import { combineReducers, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { Context, createWrapper, MakeStore } from 'next-redux-wrapper'
@@ -17,7 +16,5 @@ const makeStore: MakeStore<RootState> = (context: Context) => {
     return createStore(rootReducer)
   }
 }
-
-export const getInitialState = async (context: NextPageContext) => {}
 
 export const wrapper = createWrapper<RootState>(makeStore, { debug: false })

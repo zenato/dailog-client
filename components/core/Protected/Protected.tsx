@@ -1,23 +1,23 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import Router from 'next/router'
-import useSWR from 'swr'
 import { useAuth } from '@lib/hooks'
-import fetcher from '@lib/fetcher'
 
 const LOGIN_URL = '/login'
 
 const Protected: FC = ({ children }) => {
-  const { user, login, logout } = useAuth()
-  const { data, error } = useSWR('/api/auth/me', fetcher, {
-    onSuccess: ({ user }) => user && login(user),
-    onError: () => logout(),
+  const { user } = useAuth()
+
+  useEffect(() => {
+    if (!user) {
+      Router.push(LOGIN_URL)
+    }
   })
 
-  if (error || (data && !data.user)) {
-    Router.push(LOGIN_URL)
+  if (!user) {
+    return null
   }
 
-  return user ? <>{children}</> : null
+  return <>{children}</>
 }
 
 export default Protected

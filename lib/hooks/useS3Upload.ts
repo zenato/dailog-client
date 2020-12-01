@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import axios from 'axios'
+import { axios } from '@lib/api'
 
 const FILE_LIMIT_SIZE = 1024 * 1024 * 15
 
@@ -16,7 +16,7 @@ const useS3Upload = () => {
     }
 
     try {
-      const { data } = await axios.post(`/api/files/create-url/${info.type}`, {
+      const { data } = await axios.post(`/files/create-url/${info.type}`, {
         ...info,
         filename: file.name,
       })

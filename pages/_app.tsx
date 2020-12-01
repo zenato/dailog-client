@@ -3,7 +3,7 @@ import weekday from 'dayjs/plugin/weekday'
 import axios from 'axios'
 import { AppProps, AppContext } from 'next/app'
 import Head from 'next/head'
-import { wrapper, getInitialState } from '@store/index'
+import { wrapper } from '@store/index'
 
 import '@assets/main.css'
 
@@ -18,14 +18,17 @@ const App = (props: AppProps) => {
           name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"
         />
-        <link rel="preload" href="/api/auth/me" as="fetch" crossOrigin="anonymous"></link>
+        {/* <link rel="preload" href="/api/auth/me" as="fetch" crossOrigin="anonymous"></link> */}
       </Head>
       <Component {...pageProps} />
     </>
   )
 }
 
+// Moved to lib/ssr.ts for GetServerSideProps
+/*
 App.getInitialProps = async ({ Component, ctx }: AppContext) => {
+  ctx.store
   // Axios
   ctx.axios = axios.create({
     baseURL: process.env.API_URL || '',
@@ -44,5 +47,6 @@ App.getInitialProps = async ({ Component, ctx }: AppContext) => {
   }
   return { pageProps }
 }
+*/
 
 export default wrapper.withRedux(App)

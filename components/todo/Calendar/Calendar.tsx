@@ -3,7 +3,6 @@ import dayjs from 'dayjs'
 import cn from 'classnames'
 import { CalendarItem } from '@components/todo'
 import { getDays, groupByDay } from '@lib/calendar'
-import { Todo } from '@lib/graphql'
 import s from './Calendar.module.css'
 
 interface Props {
