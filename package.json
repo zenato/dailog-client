@@ -1,7 +1,7 @@
 {
   "name": "dailog-client",
   "description": "Dailog Client",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "Yeongjin Lee <yeongjinnn@gmail.com>",
   "license": "MIT",
   "private": true,
