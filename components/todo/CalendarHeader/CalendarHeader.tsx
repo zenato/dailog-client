@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import dayjs from 'dayjs'
 import cn from 'classnames'
@@ -20,13 +20,15 @@ const Date: FC<Props> = ({ date }) => {
     })
   }
 
-  const handlePrev = () => moveMonth(-1)
-  const handleNext = () => moveMonth(1)
+  const handlePrev = useCallback(() => moveMonth(-1), [date])
+  const handleNext = useCallback(() => moveMonth(1), [date])
+
+  const formattedDate = useMemo(() => dayjs(date).format('YYYY / MM'), [date])
 
   return (
     <div className={cn(s.root)}>
       <IconButton icon={LeftArrow} className={cn(s.prev)} onClick={handlePrev} />
-      <div className={cn(s.state)}>{dayjs(date).format('YYYY / MM')}</div>
+      <div className={cn(s.state)}>{formattedDate}</div>
       <IconButton icon={RightArrow} className={cn(s.next)} onClick={handleNext} />
     </div>
   )

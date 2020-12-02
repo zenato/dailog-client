@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent } from 'react'
+import { FC, SyntheticEvent, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Cookie from 'js-cookie'
@@ -12,14 +12,12 @@ interface Props {
 const Modal: FC<Props> = ({ onClickItem }) => {
   const router = useRouter()
 
-  const handleLogout = (e: SyntheticEvent<EventTarget>) => {
+  const handleLogout = useCallback((e: SyntheticEvent<EventTarget>) => {
     e.preventDefault()
-
     onClickItem()
-
     Cookie.remove('authorization')
     router.push('/')
-  }
+  }, [])
 
   return (
     <div className={cn(s.root)}>

@@ -1,4 +1,4 @@
-import { FC, useState, SyntheticEvent } from 'react'
+import { FC, SyntheticEvent, useCallback, useState } from 'react'
 import cn from 'classnames'
 import { useSelector } from 'react-redux'
 import { RootState } from '@store/index'
@@ -11,21 +11,21 @@ const Header: FC = () => {
   const user = useSelector((state: RootState) => state.user)
   const [displayModal, setDisplayModal] = useState(false)
 
-  const handleDisplayModal = (e: SyntheticEvent<EventTarget>) => {
+  const toggleDisplayModal = useCallback((e: SyntheticEvent<EventTarget>) => {
     e.preventDefault()
     setDisplayModal(!displayModal)
-  }
+  }, [displayModal])
 
-  const handleClickItem = () => {
+  const handleClickItem = useCallback(() => {
     setDisplayModal(false)
-  }
+  }, [])
 
   return (
     <div className={cn(s.root)}>
       <div className={cn(s.content)}>
         <Logo />
         <div>
-          <a href="" onClick={handleDisplayModal}>
+          <a href="" onClick={toggleDisplayModal}>
             <Avatar profileImage={user?.thumbnail} />
           </a>
           {displayModal && <Modal onClickItem={handleClickItem} />}

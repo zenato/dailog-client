@@ -1,4 +1,4 @@
-import { FC, Component } from 'react'
+import { FC } from 'react'
 import cn from 'classnames'
 import s from './IconButton.module.css'
 

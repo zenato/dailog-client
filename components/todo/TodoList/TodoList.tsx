@@ -1,7 +1,7 @@
 import cn from 'classnames'
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
 import s from './TodoList.module.css'
-import { TodoCompletedIcon, TodoIncompletedIcon, TodoDeleteIcon } from '@components/icons'
+import { TodoCompletedIcon, TodoDeleteIcon, TodoIncompletedIcon } from '@components/icons'
 import { IconButton } from '@components/ui'
 
 interface Props {
@@ -12,8 +12,8 @@ interface Props {
 }
 
 const TodoList: FC<Props> = ({ items, error, onClickDone, onClickDelete }) => {
-  const handleUpdate = (item: Todo) => () => onClickDone(item)
-  const handleDelete = (item: Todo) => () => onClickDelete(item)
+  const handleUpdate = useCallback((item: Todo) => () => onClickDone(item), [])
+  const handleDelete = useCallback((item: Todo) => () => onClickDelete(item), [])
 
   return (
     <div className={cn(s.root)}>

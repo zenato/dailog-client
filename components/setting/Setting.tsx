@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useCallback, useState } from 'react'
 import cn from 'classnames'
 import { Input } from '@components/ui'
 import s from './Setting.module.css'
@@ -14,14 +14,14 @@ const Setting: FC<Props> = (props) => {
   const [showNameForm, setShowNameForm] = useState(false)
   const [name, setName] = useState(props.user.name)
 
-  const toggleNameForm = () => {
+  const toggleNameForm = useCallback(() => {
     setShowNameForm(!showNameForm)
-  }
+  }, [showNameForm])
 
-  const saveName = () => {
+  const saveName = useCallback(() => {
     toggleNameForm()
     props.saveName(name)
-  }
+  }, [name])
 
   return (
     <div className={cn(s.root)}>

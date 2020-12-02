@@ -5,6 +5,7 @@ import { gql, quries } from '@lib/api'
 import getServerSidePropsWrapper from '@lib/ssr'
 import { Layout } from '@components/core'
 import { TodoForm, TodoHeader, TodoList } from '@components/todo'
+import { useCallback, useMemo } from 'react';
 
 interface Props {
   todosByDate: [Todo]
@@ -17,26 +18,27 @@ function getDate(date: string) {
 export default function TodoDetail({ todosByDate }: Props) {
   const { query } = useRouter()
 
-  const date = getDate(query.date as string)
+  const date = useMemo(() => getDate(query.date as string), [])
   const fetchKey = [quries.TodosByDate, query.date]
 
-  const handleSubmit = async (title: string) => {
+  const handleSubmit = useCallback(async (title: string) => {
     await gql(quries.AddTodo, { input: { date, title } })
     await mutate(fetchKey)
-  }
+  }, [])
 
-  const handleDone = async (todo: Todo) => {
+  const handleDone = useCallback(async (todo: Todo) => {
     await gql(quries.UpdateTodo, { id: todo.id, isDone: !todo.isDone })
     await mutate(fetchKey)
-  }
+  }, [])
 
-  const handleDelete = async (item: Todo) => {
+  const handleDelete = useCallback(async (item: Todo) => {
     await gql(quries.DeleteTodo, { id: item.id, isDone: !item.isDone })
     await mutate(fetchKey)
-  }
+  }, [])
 
   const { data, error } = useSWR(fetchKey, async (query) => gql(query, { date }), {
     initialData: { todosByDate },
+    revalidateOnMount: true,
   })
 
   const items: [Todo] = data?.todosByDate || []

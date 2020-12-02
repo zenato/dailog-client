@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import cn from 'classnames'
 import s from './Login.module.css'
@@ -7,9 +7,9 @@ import { GoogleIcon } from '@components/icons'
 const Login: FC = () => {
   const router = useRouter()
 
-  const handleAuthGloogle = () => {
+  const handleAuthGloogle = useCallback(() => {
     router.push({ pathname: '/api/auth/google' })
-  }
+  }, [])
 
   return (
     <div className={cn(s.root)}>

@@ -5,6 +5,7 @@ import { Layout } from '@components/core'
 import { Calendar, CalendarHeader } from '@components/todo'
 import getServerSidePropsWrapper from '@lib/ssr'
 import { gql, quries } from '@lib/api'
+import { useMemo } from 'react';
 
 const DATE_FORMAT = 'YYYYMM'
 
@@ -20,9 +21,10 @@ export default function TodoCalendar({ todosByMonthly }: Props) {
   const router = useRouter()
   const { date } = router.query
 
-  const startOfMonth = getStartOfMonth(date as string)
+  const startOfMonth = useMemo(() => getStartOfMonth(date as string), [date])
+
   const { data, error } = useSWR(
-    [quries.TodosByMonthly, startOfMonth.getTime()],
+    [quries.TodosByMonthly, date],
     async (query) => gql(query, { date: startOfMonth }),
     { initialData: { todosByMonthly } },
   )

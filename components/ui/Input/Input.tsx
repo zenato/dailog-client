@@ -1,4 +1,4 @@
-import { FC, InputHTMLAttributes } from 'react'
+import { FC, InputHTMLAttributes, useCallback } from 'react'
 import cn from 'classnames'
 import s from './Input.module.css'
 
@@ -11,12 +11,12 @@ const Input: FC<Props> = (props) => {
   const { className, onChange, ...rest } = props
   const rootClassName = cn(s.root, {}, className)
 
-  const handleOnChange = (e: any) => {
+  const handleOnChange = useCallback((e: any) => {
     if (onChange) {
       onChange(e.target.value)
     }
     return null
-  }
+  }, [])
 
   return (
     <input

@@ -1,9 +1,8 @@
-import { useState, FunctionComponent, SyntheticEvent } from 'react'
+import { FunctionComponent, memo, SyntheticEvent, useCallback, useState } from 'react'
 import cn from 'classnames'
-import { Input } from '@components/ui'
-import s from './TodoForm.module.css'
+import { IconButton, Input } from '@components/ui'
 import { AlertIcon, TodoAddIcon, TodoCloseIcon } from '@components/icons'
-import { IconButton } from '@components/ui'
+import s from './TodoForm.module.css'
 
 interface Props {
   onSubmit: (title: string) => Promise<any>
@@ -14,17 +13,17 @@ const Form: FunctionComponent<Props> = ({ onSubmit }) => {
   const [title, setTitle] = useState('')
   const [error, setError] = useState('')
 
-  const initForm = () => {
+  const initForm = useCallback(() => {
     setTitle('')
     setError('')
-  }
+  }, [])
 
-  const toggleDisplay = () => {
+  const toggleDisplay = useCallback(() => {
     setDisplay(!display)
     !display && initForm()
-  }
+  }, [display])
 
-  const handleSubmit = async (e: SyntheticEvent<EventTarget>) => {
+  const handleSubmit = useCallback(async (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault()
 
     if (!title) {
@@ -37,7 +36,7 @@ const Form: FunctionComponent<Props> = ({ onSubmit }) => {
       setError(e)
     }
     toggleDisplay()
-  }
+  }, [title])
 
   return (
     <div className={cn(s.root)}>
