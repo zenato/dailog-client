@@ -19,7 +19,7 @@ const getServerSidePropsWrapper: GetServerSidePropsWrapper = (callback) =>
   wrapper.getServerSideProps(async (ctx) => {
     // Axios Config
     const axiosConfig: AxiosRequestConfig = {
-      headers: { cookie: ctx.req.headers.cookie },
+      headers: { cookie: ctx.req.headers.cookie || '' },
     }
 
     try {
