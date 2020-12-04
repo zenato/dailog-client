@@ -15,37 +15,12 @@ const App = (props: AppProps) => {
       <Head>
         <meta
           name="viewport"
-          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"
         />
-        {/* <link rel="preload" href="/api/auth/me" as="fetch" crossOrigin="anonymous"></link> */}
       </Head>
       <Component {...pageProps} />
     </>
   )
 }
-
-// Moved to lib/ssr.ts for GetServerSideProps
-/*
-App.getInitialProps = async ({ Component, ctx }: AppContext) => {
-  ctx.store
-  // Axios
-  ctx.axios = axios.create({
-    baseURL: process.env.API_URL || '',
-    headers: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined,
-  })
-
-  // initialize on server
-  if (ctx.req) {
-    await getInitialState(ctx)
-  }
-
-  let pageProps = {}
-
-  if (Component.getInitialProps) {
-    pageProps = await Component.getInitialProps(ctx)
-  }
-  return { pageProps }
-}
-*/
 
 export default wrapper.withRedux(App)

@@ -1,7 +1,6 @@
 import useSWR, { mutate } from 'swr'
 import { useAuth, useS3Upload, useUpload } from '@lib/hooks'
-import { fetcher, gql, quries } from '@lib/api'
-import getServerSidePropsWrapper from '@lib/ssr'
+import { gql, quries } from '@lib/api'
 import { Layout } from '@components/core'
 import { Setting as SettingForm } from '@components/setting'
 
@@ -10,11 +9,8 @@ interface Props {
 }
 
 export default function Setting(props: Props) {
-  const { setUser } = useAuth()
-  const { data } = useSWR('/auth/me', fetcher, {
-    initialData: { user: props.user },
-    onSuccess: ({ user }) => setUser(user),
-  })
+  const { user, revalidate } = useAuth()
+
   const [upload] = useUpload()
   const [s3Upload] = useS3Upload()
 
@@ -26,37 +22,27 @@ export default function Setting(props: Props) {
     if (!image) return
 
     await gql(quries.UpdateThumbnail, { url: image })
-    mutate('/auth/me')
+    revalidate()
   }
 
   const deleteThumbnail = async () => {
     await gql(quries.UpdateThumbnail, { url: null })
-    mutate('/auth/me')
+    revalidate()
   }
 
   const saveName = async (name: string) => {
     await gql(quries.UpdateProfileName, { name })
-    mutate('/auth/me')
+    revalidate()
   }
-
-  const user = data?.user
 
   return (
     <Layout>
-      {!user && <div>Loading...</div>}
-      {user && (
-        <SettingForm
-          user={user}
-          uploadThumbnail={uploadThumbnail}
-          deleteThumbnail={deleteThumbnail}
-          saveName={saveName}
-        />
-      )}
+      <SettingForm
+        user={user!}
+        uploadThumbnail={uploadThumbnail}
+        deleteThumbnail={deleteThumbnail}
+        saveName={saveName}
+      />
     </Layout>
   )
 }
-
-export const getServerSideProps = getServerSidePropsWrapper(async ({ axiosConfig }) => {
-  const { user } = await fetcher('/auth/me', axiosConfig)
-  return { props: { user } }
-})

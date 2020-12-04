@@ -5,19 +5,15 @@ import { useAuth } from '@lib/hooks'
 const LOGIN_URL = '/login'
 
 const Protected: FC = ({ children }) => {
-  const { user } = useAuth()
+  const { user, loading } = useAuth()
 
   useEffect(() => {
-    if (!user) {
+    if (!loading && !user) {
       Router.push(LOGIN_URL)
     }
   })
 
-  if (!user) {
-    return null
-  }
-
-  return <>{children}</>
+  return <>{user ? children : null}</>
 }
 
 export default Protected

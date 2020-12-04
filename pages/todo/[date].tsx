@@ -2,20 +2,15 @@ import dayjs from 'dayjs'
 import useSWR, { mutate } from 'swr'
 import { useRouter } from 'next/router'
 import { gql, quries } from '@lib/api'
-import getServerSidePropsWrapper from '@lib/ssr'
 import { Layout } from '@components/core'
 import { TodoForm, TodoHeader, TodoList } from '@components/todo'
-import { useCallback, useMemo } from 'react';
-
-interface Props {
-  todosByDate: [Todo]
-}
+import { useCallback, useMemo } from 'react'
 
 function getDate(date: string) {
   return dayjs(date, 'YYYYMMDD')
 }
 
-export default function TodoDetail({ todosByDate }: Props) {
+export default function TodoDetail() {
   const { query } = useRouter()
 
   const date = useMemo(() => getDate(query.date as string), [])
@@ -36,9 +31,7 @@ export default function TodoDetail({ todosByDate }: Props) {
     await mutate(fetchKey)
   }, [])
 
-  const { data, error } = useSWR(fetchKey, async (query) => gql(query, { date }), {
-    initialData: { todosByDate },
-  })
+  const { data, error } = useSWR(fetchKey, async (query) => gql(query, { date }))
 
   const items: [Todo] = data?.todosByDate || []
 
@@ -50,13 +43,3 @@ export default function TodoDetail({ todosByDate }: Props) {
     </Layout>
   )
 }
-
-export const getServerSideProps = getServerSidePropsWrapper(async ({ query, axiosConfig }) => {
-  const date = getDate(query.date as string)
-  const { todosByDate } = await gql(quries.TodosByDate, { date }, axiosConfig)
-  return {
-    props: {
-      todosByDate,
-    },
-  }
-})
