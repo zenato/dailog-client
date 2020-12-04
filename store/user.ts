@@ -17,7 +17,7 @@ const logout = createAction(LOGOUT)()
 export const actions = { hydrate, setUser, logout }
 
 export default createReducer<UserState, ActionType<typeof actions>>(initialState, {
-  [HYDRATE]: (state, action) => action.payload.user,
+  [HYDRATE]: (state, action) => action.payload.user || state,
   [SET_USER]: (state, action) => action.payload,
   [LOGOUT]: () => null,
 })
