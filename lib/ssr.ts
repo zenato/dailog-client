@@ -8,12 +8,20 @@ type WrapperContext = {
   axiosConfig: AxiosRequestConfig
 }
 
-type GetServerSidePropsType<T> = T extends (callback: (ctx: infer CP) => infer CR) => infer R
-  ? (callback: (ctx: CP & WrapperContext) => Promise<CR>) => R
-  : never
+type InferGetServerSideProps<T> = T extends (callback: (ctx: infer CP) => infer CR) => infer R
+   ? [CP, CR, R]
+   : never
+type GetServerSidePropsType = InferGetServerSideProps<typeof wrapper.getServerSideProps>
 
-export type GetServerSidePropsWrapper = GetServerSidePropsType<typeof wrapper.getServerSideProps>
-export type GetServerSidePropsWrapperContext = Parameters<GetServerSidePropsWrapper>[0]
+export type GetServerSidePropsWrapperContext = GetServerSidePropsType[0] & WrapperContext
+export type GetServerSidePropsWrapper = (callback: (ctx: GetServerSidePropsWrapperContext) => GetServerSidePropsType[1]) => GetServerSidePropsType[2]
+
+async function initialize(ctx: GetServerSidePropsWrapperContext) {
+  const { user } = await fetcher('/auth/me', ctx.axiosConfig)
+  if (user) {
+    ctx.store.dispatch(actions.setUser(user))
+  }
+}
 
 const getServerSidePropsWrapper: GetServerSidePropsWrapper = (callback) =>
   wrapper.getServerSideProps(async (ctx) => {
@@ -22,19 +30,16 @@ const getServerSidePropsWrapper: GetServerSidePropsWrapper = (callback) =>
       headers: { cookie: ctx.req.headers.cookie || '' },
     }
 
-    try {
-      // Initial state
-      const { user } = await fetcher('/auth/me', axiosConfig)
-      if (user) {
-        ctx.store.dispatch(actions.setUser(user))
-      }
+    const wrapperContext: GetServerSidePropsWrapperContext = { ...ctx, axiosConfig }
 
-      return await callback({ ...ctx, axiosConfig })
+    try {
+      await initialize(wrapperContext)
+      return await callback(wrapperContext)
     } catch (e) {
       if (e instanceof AuthenticationError) {
         return {
           redirect: {
-            destination: '/login',
+            destination: e.redirect,
             permanent: false,
           },
         }
