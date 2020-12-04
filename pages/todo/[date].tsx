@@ -38,7 +38,6 @@ export default function TodoDetail({ todosByDate }: Props) {
 
   const { data, error } = useSWR(fetchKey, async (query) => gql(query, { date }), {
     initialData: { todosByDate },
-    revalidateOnMount: true,
   })
 
   const items: [Todo] = data?.todosByDate || []
