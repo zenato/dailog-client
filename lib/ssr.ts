@@ -33,7 +33,10 @@ const getServerSidePropsWrapper: GetServerSidePropsWrapper = (callback) =>
     const wrapperContext: GetServerSidePropsWrapperContext = { ...ctx, axiosConfig }
 
     try {
-      await initialize(wrapperContext)
+      // Perform on only server
+      if (!/\/\_next\/data\//.test(ctx.req.url!)) {
+        await initialize(wrapperContext)
+      }
       return await callback(wrapperContext)
     } catch (e) {
       if (e instanceof AuthenticationError) {
