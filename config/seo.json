@@ -1,0 +1,16 @@
+{
+  "title": "Dailog",
+  "titleTemplate": "%s - Dailog",
+  "description": "Dailog TODO",
+  "openGraph": {
+    "type": "website",
+    "locale": "en_IE",
+    "url": "https://yoursite.app",
+    "site_name": "Dailog"
+  },
+  "twitter": {
+    "handle": "@nextjs",
+    "site": "@nextjs",
+    "cardType": "summary_large_image"
+  }
+}
