@@ -2,10 +2,10 @@ import { FC, SyntheticEvent, useCallback, useState } from 'react'
 import cn from 'classnames'
 import { useSelector } from 'react-redux'
 import { RootState } from '@store/index'
-import { Avatar } from '@components/core'
+import { Avatar } from '@components/common'
 import { Logo } from '@components/ui'
 import Modal from './Modal'
-import s from './Header.module.css'
+import s from './Navbar.module.css'
 
 const Header: FC = () => {
   const user = useSelector((state: RootState) => state.user)

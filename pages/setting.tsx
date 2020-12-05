@@ -1,7 +1,6 @@
-import useSWR, { mutate } from 'swr'
 import { useAuth, useS3Upload, useUpload } from '@lib/hooks'
 import { gql, quries } from '@lib/api'
-import { Layout } from '@components/core'
+import { Layout } from '@components/common'
 import { Setting as SettingForm } from '@components/setting'
 
 interface Props {

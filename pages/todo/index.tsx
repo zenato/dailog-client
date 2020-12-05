@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import dayjs from 'dayjs'
-import { Layout } from '@components/core'
+import { Layout } from '@components/common'
 import { Calendar, CalendarHeader } from '@components/todo'
 import { gql, quries } from '@lib/api'
 import { useMemo } from 'react'

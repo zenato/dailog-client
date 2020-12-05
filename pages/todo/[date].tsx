@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import useSWR, { mutate } from 'swr'
 import { useRouter } from 'next/router'
 import { gql, quries } from '@lib/api'
-import { Layout } from '@components/core'
+import { Layout } from '@components/common'
 import { TodoForm, TodoHeader, TodoList } from '@components/todo'
 import { useCallback, useMemo } from 'react'
 
