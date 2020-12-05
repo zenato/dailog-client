@@ -1,22 +1,19 @@
-import { FC, useCallback } from 'react'
-import { useRouter } from 'next/router'
+import { FC } from 'react'
 import cn from 'classnames'
-import s from './Login.module.css'
 import { GoogleIcon } from '@components/icons'
+import s from './Login.module.css'
 
-const Login: FC = () => {
-  const router = useRouter()
+interface Props {
+  googleAuthCallback: () => void
+}
 
-  const handleAuthGloogle = useCallback(() => {
-    router.push({ pathname: '/api/auth/google' })
-  }, [])
-
+const Login: FC<Props> = ({ googleAuthCallback }) => {
   return (
     <div className={cn(s.root)}>
       <div className={cn(s.text)}>Login in to Dailog</div>
       <div className={cn(s.buttons)}>
-        <button className={cn(s.googleButton)} onClick={handleAuthGloogle}>
-          <GoogleIcon /> <span>Login with Google</span>
+        <button className={cn(s.googleButton)} onClick={googleAuthCallback}>
+          <GoogleIcon aria-label="Login" /> <span>Login with Google</span>
         </button>
       </div>
     </div>

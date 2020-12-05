@@ -1,13 +1,13 @@
-import { NextPage } from 'next'
+import { useCallback } from 'react'
+import { useRouter } from 'next/router'
 import { Login as LoginForm } from '@components/login'
 
-interface FormValues {
-  email: string
-  password: string
-}
+export default function Login() {
+  const router = useRouter()
 
-const Login: NextPage = () => {
-  return <LoginForm />
-}
+  const handleGoogleAuth = useCallback(() => {
+    router.push({ pathname: '/api/auth/google' })
+  }, [])
 
-export default Login
+  return <LoginForm googleAuthCallback={handleGoogleAuth} />
+}
