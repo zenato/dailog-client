@@ -25,12 +25,14 @@ const TodoList: FC<Props> = ({ items, error, onClickDone, onClickDelete }) => {
             icon={item.isDone ? TodoCompletedIcon : TodoIncompletedIcon}
             className={cn(s.doneButton)}
             onClick={handleUpdate(item)}
+            aria-label={item.isDone ? 'Incomplete' : 'Complete'}
           />
           <span className={cn(s.title, { [s.done]: item.isDone })}>{item.title}</span>
           <IconButton
             icon={TodoDeleteIcon}
             className={cn(s.deleteButton)}
             onClick={handleDelete(item)}
+            aria-label="Delete"
           />
         </div>
       ))}

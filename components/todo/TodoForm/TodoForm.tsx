@@ -23,20 +23,23 @@ const Form: FunctionComponent<Props> = ({ onSubmit }) => {
     !display && initForm()
   }, [display])
 
-  const handleSubmit = useCallback(async (e: SyntheticEvent<EventTarget>) => {
-    e.preventDefault()
+  const handleSubmit = useCallback(
+    async (e: SyntheticEvent<EventTarget>) => {
+      e.preventDefault()
 
-    if (!title) {
-      setError('Input title field')
-      return
-    }
-    try {
-      await onSubmit(title)
-    } catch (e) {
-      setError(e)
-    }
-    toggleDisplay()
-  }, [title])
+      if (!title) {
+        setError('Input title field')
+        return
+      }
+      try {
+        await onSubmit(title)
+      } catch (e) {
+        setError(e)
+      }
+      toggleDisplay()
+    },
+    [title],
+  )
 
   return (
     <div className={cn(s.root)}>
@@ -44,6 +47,7 @@ const Form: FunctionComponent<Props> = ({ onSubmit }) => {
         icon={display ? TodoCloseIcon : TodoAddIcon}
         className={cn(s.addButton, { [s.close]: display })}
         onClick={toggleDisplay}
+        aria-label={display ? 'Close' : 'Add'}
       />
       {display && (
         <div className={cn(s.formContainer)}>
@@ -56,7 +60,7 @@ const Form: FunctionComponent<Props> = ({ onSubmit }) => {
               onChange={setTitle}
               autoFocus
             />
-            <button type="submit" className={cn(s.submitButton)}>
+            <button type="submit" className={cn(s.submitButton)} aria-label="Submit">
               Add
             </button>
           </form>

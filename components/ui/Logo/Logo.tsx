@@ -5,7 +5,7 @@ import s from './Logo.module.css'
 
 const Logo: FC = () => (
   <div className={cn(s.root)}>
-    <Link href="/todo">
+    <Link href="/todo" aria-label="Logo">
       <a>Dailog</a>
     </Link>
   </div>

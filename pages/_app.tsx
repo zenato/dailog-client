@@ -13,10 +13,8 @@ const App = (props: AppProps) => {
   return (
     <>
       <Head>
-        <meta
-          name="viewport"
-          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Dailog</title>
       </Head>
       <Component {...pageProps} />
     </>

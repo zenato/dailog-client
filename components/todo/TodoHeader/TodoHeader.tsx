@@ -21,7 +21,12 @@ const TodoHeader: FC<Props> = ({ date }) => {
 
   return (
     <div className={cn(s.root)}>
-      <IconButton icon={LeftArrow} className={cn(s.backButton)} onClick={goBack} />
+      <IconButton
+        icon={LeftArrow}
+        className={cn(s.backButton)}
+        onClick={goBack}
+        aria-label="Back to calendar"
+      />
       <span>{formattedDate}</span>
     </div>
   )

@@ -11,10 +11,13 @@ const Header: FC = () => {
   const user = useSelector((state: RootState) => state.user)
   const [displayModal, setDisplayModal] = useState(false)
 
-  const toggleDisplayModal = useCallback((e: SyntheticEvent<EventTarget>) => {
-    e.preventDefault()
-    setDisplayModal(!displayModal)
-  }, [displayModal])
+  const toggleDisplayModal = useCallback(
+    (e: SyntheticEvent<EventTarget>) => {
+      e.preventDefault()
+      setDisplayModal(!displayModal)
+    },
+    [displayModal],
+  )
 
   const handleClickItem = useCallback(() => {
     setDisplayModal(false)
@@ -25,7 +28,7 @@ const Header: FC = () => {
       <div className={cn(s.content)}>
         <Logo />
         <div>
-          <a href="" onClick={toggleDisplayModal}>
+          <a href="" onClick={toggleDisplayModal} aria-label="Menu">
             <Avatar profileImage={user?.thumbnail} />
           </a>
           {displayModal && <Modal onClickItem={handleClickItem} />}

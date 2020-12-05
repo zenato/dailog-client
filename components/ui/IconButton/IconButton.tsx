@@ -1,16 +1,14 @@
-import { FC } from 'react'
+import { ButtonHTMLAttributes, FC } from 'react'
 import cn from 'classnames'
 import s from './IconButton.module.css'
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: any
-  className?: string
-  onClick?: () => any
 }
 
-const IconButton: FC<Props> = ({ icon: IconImage, className, onClick }) => {
+const IconButton: FC<Props> = ({ icon: IconImage, className, ...attrs }) => {
   return (
-    <button className={cn(s.root, className)} onClick={onClick}>
+    <button className={cn(s.root, className)} {...attrs}>
       <IconImage />
     </button>
   )

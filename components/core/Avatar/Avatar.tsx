@@ -9,7 +9,7 @@ interface Props {
 const Avatar: FC<Props> = ({ profileImage }) => {
   return (
     <div className={cn(s.root)}>
-      <img width="100%" height="100%" src={profileImage || '/profile.png'}></img>
+      <img width="100%" height="100%" src={profileImage || '/profile.png'} alt="Profile"></img>
     </div>
   )
 }

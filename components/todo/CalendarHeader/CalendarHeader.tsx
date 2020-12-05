@@ -27,9 +27,14 @@ const Date: FC<Props> = ({ date }) => {
 
   return (
     <div className={cn(s.root)}>
-      <IconButton icon={LeftArrow} className={cn(s.prev)} onClick={handlePrev} />
+      <IconButton
+        icon={LeftArrow}
+        className={cn(s.prev)}
+        onClick={handlePrev}
+        aria-label="Previous"
+      />
       <div className={cn(s.state)}>{formattedDate}</div>
-      <IconButton icon={RightArrow} className={cn(s.next)} onClick={handleNext} />
+      <IconButton icon={RightArrow} className={cn(s.next)} onClick={handleNext} aria-label="Next" />
     </div>
   )
 }
