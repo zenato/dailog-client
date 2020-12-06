@@ -1,10 +1,10 @@
-import dayjs from 'dayjs'
+import { useCallback, useMemo } from 'react'
 import useSWR, { mutate } from 'swr'
 import { useRouter } from 'next/router'
 import { gql, quries } from '@lib/api'
+import dayjs from '@lib/dayjs'
 import { Layout } from '@components/common'
 import { TodoForm, TodoHeader, TodoList } from '@components/todo'
-import { useCallback, useMemo } from 'react'
 
 function getDate(date: string) {
   return dayjs(date, 'YYYYMMDD')

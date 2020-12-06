@@ -1,10 +1,10 @@
+import { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
-import dayjs from 'dayjs'
+import { gql, quries } from '@lib/api'
+import dayjs from '@lib/dayjs'
 import { Layout } from '@components/common'
 import { Calendar, CalendarHeader } from '@components/todo'
-import { gql, quries } from '@lib/api'
-import { useMemo } from 'react'
 
 const DATE_FORMAT = 'YYYYMM'
 

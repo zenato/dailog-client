@@ -1,10 +1,10 @@
 import { FC, useMemo } from 'react'
 import Link from 'next/link'
 import cn from 'classnames'
-import dayjs from 'dayjs'
 import { Item } from '@lib/calendar'
-import s from './CalendarItem.module.css'
+import dayjs from '@lib/dayjs'
 import { CalendarCompleted, CalendarIncompleted } from '@components/icons'
+import s from './CalendarItem.module.css'
 
 interface Props {
   day: Item

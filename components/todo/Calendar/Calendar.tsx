@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react'
-import dayjs from 'dayjs'
 import cn from 'classnames'
+import dayjs from '@lib/dayjs'
 import { CalendarItem } from '@components/todo'
 import { getDays, groupByDay } from '@lib/calendar'
 import s from './Calendar.module.css'

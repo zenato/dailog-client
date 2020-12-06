@@ -1,10 +1,10 @@
 import { FC, useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
-import dayjs from 'dayjs'
 import cn from 'classnames'
-import s from './CalendarHeader.module.css'
 import { LeftArrow, RightArrow } from '@components/icons'
 import { IconButton } from '@components/ui'
+import dayjs from '@lib/dayjs'
+import s from './CalendarHeader.module.css'
 
 interface Props {
   date: Date
