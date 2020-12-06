@@ -4,10 +4,12 @@
   flex-direction: column;
   width: 12rem;
   right: 0;
-  box-shadow: #0000001a 0px 0px 8px;
-  border-radius: 3px;
+  margin-top: 0.3rem;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
+  box-shadow: #0000001a 0px 0px 8px;
+  border-radius: 3px;
+  background-color: #fff;
 }
 
 .item {
