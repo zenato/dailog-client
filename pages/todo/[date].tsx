@@ -13,7 +13,12 @@ function getDate(date: string) {
 export default function TodoDetail() {
   const { query } = useRouter()
 
+  if (query.date === '[date]') {
+    return null
+  }
+
   const date = useMemo(() => getDate(query.date as string), [])
+
   const fetchKey = [quries.TodosByDate, query.date]
 
   const handleSubmit = useCallback(async (title: string) => {

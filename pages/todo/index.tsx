@@ -13,22 +13,25 @@ function getStartOfMonth(date: string) {
 }
 
 export default function TodoCalendar() {
-  const router = useRouter()
-  const { date } = router.query
+  const { query } = useRouter()
 
-  const startOfMonth = useMemo(() => getStartOfMonth(date as string), [date])
+  if (!query.date) {
+    return null
+  }
 
-  const { data, error } = useSWR([quries.TodosByMonthly, date], async (query) =>
-    gql(query, { date: startOfMonth }),
-  )
+  const date = useMemo(() => getStartOfMonth(query.date as string), [query.date])
+
+  const { data, error } = useSWR([quries.TodosByMonthly, query.date], async (query) => {
+    return gql(query, { date: date })
+  })
 
   const items: [Todo] = data?.todosByMonthly ?? []
 
   return (
     <Layout>
       {error && <div>{error.message}</div>}
-      <CalendarHeader date={startOfMonth} />
-      <Calendar date={startOfMonth} todos={items} error={error} />
+      <CalendarHeader date={date} />
+      <Calendar date={date} todos={items} error={error} />
     </Layout>
   )
 }
