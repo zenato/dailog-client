@@ -1,8 +1,8 @@
 module.exports = {
   target: 'serverless',
   i18n: {
-    locales: ['en'],
-    defaultLocale: 'en',
+    locales: ['ko-KR', 'en-US'],
+    defaultLocale: 'en-US',
   },
   async rewrites() {
     return [
@@ -12,13 +12,14 @@ module.exports = {
       },
     ]
   },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/todo',
-        permanent: false,
-      },
-    ]
-  },
+  // Disable redirection from index page when enable i18n
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/',
+  //       destination: '/todo',
+  //       permanent: false,
+  //     },
+  //   ]
+  // },
 }
