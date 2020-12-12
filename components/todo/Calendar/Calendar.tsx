@@ -1,22 +1,21 @@
 import { FC, useMemo } from 'react'
 import cn from 'classnames'
-import dayjs from '@lib/dayjs'
+import { Dayjs } from 'dayjs'
+import { useDate } from '@lib/hooks'
 import { CalendarItem } from '@components/todo'
-import { getDays, groupByDay } from '@lib/calendar'
 import s from './Calendar.module.css'
 
 interface Props {
   todos: [Todo]
   error: any
-  date: Date
+  date: Dayjs
 }
 
 const Calendar: FC<Props> = ({ todos, date }) => {
+  const { daysInMonth, groupByDay } = useDate()
+
   const { days, todosByDay } = useMemo(
-    () => ({
-      days: getDays(date),
-      todosByDay: groupByDay(todos),
-    }),
+    () => ({ days: daysInMonth(date), todosByDay: groupByDay(todos) }),
     [date, todos],
   )
 
@@ -37,8 +36,8 @@ const Calendar: FC<Props> = ({ todos, date }) => {
         {days.map((row, idx) => (
           <tr key={`row-${idx}`}>
             {row.map((i) => (
-              <td key={i.date.getTime()} className={cn(s.day)}>
-                <CalendarItem day={i} todos={todosByDay[dayjs(i.date).format('YYYYMMDD')]} />
+              <td key={i.date.valueOf()} className={cn(s.day)}>
+                <CalendarItem day={i} todos={todosByDay[i.date.format('YYYYMMDD')]} />
               </td>
             ))}
           </tr>

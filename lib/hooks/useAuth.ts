@@ -6,7 +6,7 @@ import { fetcher } from '@lib/api'
 import { RootState } from '@store/index'
 import { actions } from '@store/user'
 
-const useAuth = () => {
+export default function useAuth() {
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
 
@@ -33,5 +33,3 @@ const useAuth = () => {
     logout,
   }
 }
-
-export default useAuth

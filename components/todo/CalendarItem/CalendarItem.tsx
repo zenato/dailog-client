@@ -1,8 +1,7 @@
 import { FC, useMemo } from 'react'
 import Link from 'next/link'
 import cn from 'classnames'
-import { Item } from '@lib/calendar'
-import dayjs from '@lib/dayjs'
+import { Item } from '@lib/hooks/useDate'
 import { CalendarCompleted, CalendarIncompleted } from '@components/icons'
 import s from './CalendarItem.module.css'
 
@@ -14,8 +13,8 @@ interface Props {
 const CalendarItem: FC<Props> = ({ day, todos }) => {
   const className = useMemo(() => {
     return {
-      [s.sun]: day.date.getDay() === 0,
-      [s.sat]: day.date.getDay() === 6,
+      [s.sun]: day.date.day() === 0,
+      [s.sat]: day.date.day() === 6,
       [s.disabled]: !day.isCurrentMonth,
     }
   }, [day, todos])
@@ -25,14 +24,14 @@ const CalendarItem: FC<Props> = ({ day, todos }) => {
       <div className={cn(s.content)}>
         {day.isCurrentMonth ? (
           <>
-            <Link href={`/todo/${dayjs(day.date).format('YYYYMMDD')}`}>
-              <a className={cn(s.day)}>{day.date.getDate()}</a>
+            <Link href={`/todo/${day.date.format('YYYY/M/D')}`}>
+              <a className={cn(s.day)}>{day.date.date()}</a>
             </Link>
             {todos?.every((i) => i.isDone) && <CalendarCompleted className={cn(s.completed)} />}
             {todos?.some((i) => !i.isDone) && <CalendarIncompleted className={cn(s.incompleted)} />}
           </>
         ) : (
-          <div className={cn(s.day)}>{day.date.getDate()}</div>
+          <div className={cn(s.day)}>{day.date.date()}</div>
         )}
       </div>
     </div>

@@ -1,29 +1,21 @@
-import { FC, useCallback, useMemo } from 'react'
+import { FC, useCallback } from 'react'
 import { useRouter } from 'next/router'
+import { Dayjs } from 'dayjs'
 import cn from 'classnames'
 import { LeftArrow, RightArrow } from '@components/icons'
 import { IconButton } from '@components/ui'
-import dayjs from '@lib/dayjs'
 import s from './CalendarHeader.module.css'
 
 interface Props {
-  date: Date
+  date: Dayjs
 }
 
 const Date: FC<Props> = ({ date }) => {
   const router = useRouter()
 
-  const moveMonth = (addMonth: number) => {
-    router.push({
-      pathname: '/todo',
-      query: { date: dayjs(date).add(addMonth, 'month').format('YYYYMM') },
-    })
-  }
-
-  const handlePrev = useCallback(() => moveMonth(-1), [date])
-  const handleNext = useCallback(() => moveMonth(1), [date])
-
-  const formattedDate = useMemo(() => dayjs(date).format('YYYY / MM'), [date])
+  const move = (add: number) => router.push(`/todo/${date.add(add, 'month').format('YYYY/M')}`)
+  const handlePrev = useCallback(() => move(-1), [date])
+  const handleNext = useCallback(() => move(1), [date])
 
   return (
     <div className={cn(s.root)}>
@@ -33,7 +25,7 @@ const Date: FC<Props> = ({ date }) => {
         onClick={handlePrev}
         aria-label="Previous"
       />
-      <div className={cn(s.state)}>{formattedDate}</div>
+      <div className={cn(s.state)}>{date.format('YYYY / M')}</div>
       <IconButton icon={RightArrow} className={cn(s.next)} onClick={handleNext} aria-label="Next" />
     </div>
   )

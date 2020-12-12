@@ -1,18 +1,8 @@
-export const TodosByMonthly = `
-  query TodosByMonthly($date: Date!) {
-    todosByMonthly(date: $date) {
+export const Todos = `
+  query TodosByMonthly($year: String!, $month: String!, $day: String) {
+    todos(year: $year, month: $month, day: $day) {
       id
       date
-      title
-      isDone
-    }
-  }
-`
-
-export const TodosByDate = `
-  query TodosByDate($date: Date!) {
-    todosByDate(date: $date) {
-      id
       title
       isDone
     }
