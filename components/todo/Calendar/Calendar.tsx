@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react'
 import cn from 'classnames'
-import { Dayjs } from 'dayjs'
 import { useDate } from '@lib/hooks'
 import { CalendarItem } from '@components/todo'
 import s from './Calendar.module.css'
@@ -8,15 +7,16 @@ import s from './Calendar.module.css'
 interface Props {
   todos: [Todo]
   error: any
-  date: Dayjs
+  year: string
+  month: string
 }
 
-const Calendar: FC<Props> = ({ todos, date }) => {
-  const { daysInMonth, groupByDay } = useDate()
+const Calendar: FC<Props> = ({ todos, year, month }) => {
+  const { getCalendar, groupByDate } = useDate()
 
-  const { days, todosByDay } = useMemo(
-    () => ({ days: daysInMonth(date), todosByDay: groupByDay(todos) }),
-    [date, todos],
+  const { calendar, grouppedTodos } = useMemo(
+    () => ({ calendar: getCalendar(year, month), grouppedTodos: groupByDate(todos) }),
+    [year, month, todos],
   )
 
   return (
@@ -33,11 +33,11 @@ const Calendar: FC<Props> = ({ todos, date }) => {
         </tr>
       </thead>
       <tbody>
-        {days.map((row, idx) => (
+        {calendar.map((row, idx) => (
           <tr key={`row-${idx}`}>
             {row.map((i) => (
               <td key={i.date.valueOf()} className={cn(s.day)}>
-                <CalendarItem day={i} todos={todosByDay[i.date.format('YYYYMMDD')]} />
+                <CalendarItem day={i} todos={grouppedTodos[i.date.format('YYYYMMDD')]} />
               </td>
             ))}
           </tr>

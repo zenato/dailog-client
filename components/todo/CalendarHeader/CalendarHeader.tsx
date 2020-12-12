@@ -1,17 +1,21 @@
-import { FC, useCallback } from 'react'
+import { FC, useMemo, useCallback } from 'react'
 import { useRouter } from 'next/router'
-import { Dayjs } from 'dayjs'
 import cn from 'classnames'
+import { useDate } from '@lib/hooks'
 import { LeftArrow, RightArrow } from '@components/icons'
 import { IconButton } from '@components/ui'
 import s from './CalendarHeader.module.css'
 
 interface Props {
-  date: Dayjs
+  year: string
+  month: string
 }
 
-const Date: FC<Props> = ({ date }) => {
+const Date: FC<Props> = ({ year, month }) => {
   const router = useRouter()
+  const { parse } = useDate()
+
+  const date = useMemo(() => parse(year, month), [year, month])
 
   const move = (add: number) => router.push(`/todo/${date.add(add, 'month').format('YYYY/M')}`)
   const handlePrev = useCallback(() => move(-1), [date])

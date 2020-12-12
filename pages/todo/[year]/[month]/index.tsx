@@ -13,7 +13,11 @@ export default function TodoCalendar() {
   const { year, month } = router.query
   const isReady = year && month
 
-  const date = useMemo(() => parse(year as string, month as string), [year, month])
+  const { date, params } = useMemo(() => {
+    const date = parse(year as string, month as string)
+    const params = { year: date.format('YYYY'), month: date.format('M') }
+    return { date, params }
+  }, [year, month])
 
   useEffect(() => {
     if (isReady && date.format('YYYYM') !== (year as string) + (month as string)) {
@@ -21,18 +25,15 @@ export default function TodoCalendar() {
     }
   }, [isReady])
 
-  const { data, error } = useSWR(
-    isReady ? [quries.Todos, year, month] : null,
-    async (query, year, month) => gql(query, { year, month }),
-  )
+  const { data, error } = useSWR(isReady ? [quries.Todos, params] : null, gql)
 
   const items: [Todo] = data?.todos ?? []
 
   return (
     <>
       {error && <div>{error.message}</div>}
-      <CalendarHeader date={date} />
-      <Calendar date={date} todos={items} error={error} />
+      <CalendarHeader {...params} />
+      <Calendar {...params} todos={items} error={error} />
     </>
   )
 }

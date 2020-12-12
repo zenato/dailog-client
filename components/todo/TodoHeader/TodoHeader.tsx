@@ -1,13 +1,12 @@
 import { FC, useCallback } from 'react'
 import { useRouter } from 'next/router'
-import { Dayjs } from 'dayjs'
 import cn from 'classnames'
 import { LeftArrow } from '@components/icons'
 import { IconButton } from '@components/ui'
 import s from './TodoHeader.module.css'
 
 interface Props {
-  date: Dayjs
+  date: string
 }
 
 const TodoHeader: FC<Props> = ({ date }) => {
@@ -25,7 +24,7 @@ const TodoHeader: FC<Props> = ({ date }) => {
         onClick={goBack}
         aria-label="Back to calendar"
       />
-      <span>{date.format('YYYY / MM / DD')}</span>
+      <span>{date}</span>
     </div>
   )
 }

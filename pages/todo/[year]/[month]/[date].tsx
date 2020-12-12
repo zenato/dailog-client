@@ -10,23 +10,34 @@ export default function TodoDetail() {
   const router = useRouter()
   const { parse } = useDate()
 
-  const { year, month, day } = router.query
-  const isReady = year && month && day
+  const { year, month, date } = router.query
+  const isReady = year && month && date
 
-  const date = useMemo(() => parse(year as string, month as string, day as string), [isReady])
+  const { currentDate, params } = useMemo(() => {
+    const currentDate = parse(year as string, month as string, date as string)
+    const params = {
+      year: currentDate.format('YYYY'),
+      month: currentDate.format('M'),
+      date: currentDate.format('D'),
+    }
+    return { currentDate, params }
+  }, [isReady])
 
   useEffect(() => {
     if (isReady) {
-      if (date.format('YYYYMD') !== (year as string) + (month as string) + (day as string)) {
-        router.push(`/todo/${date.format('YYYY/M/D')}`)
+      if (
+        currentDate.format('YYYYMD') !==
+        (year as string) + (month as string) + (date as string)
+      ) {
+        router.push(`/todo/${currentDate.format('YYYY/M/D')}`)
       }
     }
   }, [isReady])
 
-  const fetchKey = [quries.Todos, date.format('YYYY'), date.format('M'), date.format('D')]
+  const fetchKey = [quries.Todos, params]
 
   const handleSubmit = useCallback(async (title: string) => {
-    await gql(quries.AddTodo, { input: { year, month, day, title } })
+    await gql(quries.AddTodo, { input: { ...params, title } })
     await mutate(fetchKey)
   }, [])
 
@@ -40,15 +51,13 @@ export default function TodoDetail() {
     await mutate(fetchKey)
   }, [])
 
-  const { data, error } = useSWR(isReady ? fetchKey : null, async (query, year, month, day) =>
-    gql(query, { year, month, day }),
-  )
+  const { data, error } = useSWR(isReady ? fetchKey : null, gql)
 
   const items: [Todo] = data?.todos || []
 
   return (
     <>
-      <TodoHeader date={date} />
+      <TodoHeader date={currentDate.format('YYYY / M / D')} />
       <TodoForm onSubmit={handleSubmit} />
       <TodoList items={items} error={error} onClickDone={handleDone} onClickDelete={handleDelete} />
     </>

@@ -1,6 +1,6 @@
 export const Todos = `
-  query TodosByMonthly($year: String!, $month: String!, $day: String) {
-    todos(year: $year, month: $month, day: $day) {
+  query TodosByMonthly($year: String!, $month: String!, $date: String) {
+    todos(year: $year, month: $month, date: $date) {
       id
       date
       title

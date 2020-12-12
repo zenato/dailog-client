@@ -1,3 +1,4 @@
+import { useMemo, useCallback } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
@@ -18,20 +19,21 @@ export interface Item {
 export default function useDate() {
   const { user } = useAuth()
 
-  const timezone = user?.timezone || dayjs.tz.guess() || DEFAULT_TIMEZONE
   // dayjs.tz.setDefault(timezone)
+  const timezone = useMemo(() => user?.timezone || dayjs.tz.guess() || DEFAULT_TIMEZONE, [user])
 
-  const now = () => dayjs().tz(timezone)
+  const now = useCallback(() => dayjs().tz(timezone), [])
 
-  const parse = (year: string, month: string, day?: string) => {
+  const parse = useCallback((year: string, month: string, date?: string) => {
     try {
-      return dayjs(`${year}-${month}-${day || 1} 00:00`, timezone)
+      return dayjs.tz(`${year}-${month}-${date || 1} 00:00`, timezone)
     } catch (e) {
       return now().startOf('day')
     }
-  }
+  }, [])
 
-  const daysInMonth = (date: Dayjs) => {
+  const getCalendar = useCallback((year: string, month: string) => {
+    const date = parse(year, month)
     const startOfMonth = date.startOf('month')
     const lastValue = startOfMonth.endOf('month').valueOf()
     let current = startOfMonth.add(-startOfMonth.weekday(), 'day')
@@ -50,9 +52,9 @@ export default function useDate() {
       if (lastValue <= current.valueOf()) break
     }
     return items
-  }
+  }, [])
 
-  const groupByDay = <T extends { date: Date }>(items: [T]) => {
+  const groupByDate = useCallback(<T extends { date: Date }>(items: [T]) => {
     return items.reduce((acc, curr) => {
       const key = dayjs(curr.date).tz(timezone).format('YYYYMMDD')
       return {
@@ -60,7 +62,7 @@ export default function useDate() {
         [key]: (acc[key] || []).concat([curr]) as [T],
       }
     }, {} as { [key: string]: [T] })
-  }
+  }, [])
 
-  return { timezone, now, parse, daysInMonth, groupByDay }
+  return { timezone, now, parse, getCalendar, groupByDate }
 }
