@@ -52,3 +52,12 @@ export const UpdateProfileName = `
     }
   }
 `
+
+export const UpdateTimezone = `
+  mutation UpdateTimezone($timezone: String!) {
+    updateTimezone(timezone: $timezone) {
+      id
+      name
+    }
+  }
+`

@@ -34,6 +34,11 @@ export default function Setting(props: Props) {
     revalidate()
   }
 
+  const saveTimezone = async (timezone: string) => {
+    await gql(quries.UpdateTimezone, { timezone })
+    revalidate()
+  }
+
   return (
     <Layout>
       <SettingForm
@@ -41,6 +46,7 @@ export default function Setting(props: Props) {
         uploadThumbnail={uploadThumbnail}
         deleteThumbnail={deleteThumbnail}
         saveName={saveName}
+        saveTimezone={saveTimezone}
       />
     </Layout>
   )

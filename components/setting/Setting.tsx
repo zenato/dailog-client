@@ -1,6 +1,6 @@
-import { FC, useCallback, useState } from 'react'
+import { FC, FormEvent, useCallback, useState } from 'react'
 import cn from 'classnames'
-import { Input } from '@components/ui'
+import { Input, Select, TimezoneOptions } from '@components/ui'
 import s from './Setting.module.css'
 
 interface Props {
@@ -8,20 +8,41 @@ interface Props {
   uploadThumbnail: () => void
   deleteThumbnail: () => void
   saveName: (name: string) => void
+  saveTimezone: (timezone: string) => void
 }
 
 const Setting: FC<Props> = (props) => {
   const [showNameForm, setShowNameForm] = useState(false)
   const [name, setName] = useState(props.user.name)
 
+  const [showTimezoneForm, setShowTimezoneForm] = useState(false)
+  const [timezone, setTimezone] = useState(props.user.timezone)
+
   const toggleNameForm = useCallback(() => {
     setShowNameForm(!showNameForm)
   }, [showNameForm])
 
-  const saveName = useCallback(() => {
-    toggleNameForm()
-    props.saveName(name)
-  }, [name])
+  const saveName = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      toggleNameForm()
+      props.saveName(name)
+    },
+    [name],
+  )
+
+  const toggleTimezoneForm = useCallback(() => {
+    setShowTimezoneForm(!showTimezoneForm)
+  }, [showTimezoneForm])
+
+  const saveTimezone = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      toggleTimezoneForm()
+      props.saveTimezone(timezone)
+    },
+    [timezone],
+  )
 
   return (
     <div className={cn(s.root)}>
@@ -49,15 +70,43 @@ const Setting: FC<Props> = (props) => {
             </>
           )}
           {showNameForm && (
-            <form className={cn(s.nameUpdateForm)}>
+            <form onSubmit={saveName} className={cn(s.nameUpdateForm)}>
               <Input type="text" value={name} onChange={setName} className={cn(s.nameInput)} />
               <div className={cn(s.nameSubmitContainer)}>
-                <button type="submit" className={cn(s.nameSubmit)} onClick={saveName}>
+                <button type="submit" className={cn(s.nameSubmit)}>
                   저장
                 </button>
               </div>
             </form>
           )}
+        </div>
+        <div className={cn(s.nameContainer)}></div>
+      </section>
+      <section className={cn(s.body)}>
+        <div className={cn(s.settingItem)}>
+          <div className={cn(s.label)}>시간대</div>
+          <div className={cn(s.item)}>
+            {!showTimezoneForm && (
+              <>
+                {timezone}
+                <button className={cn(s.updateButton, s.leftMargin)} onClick={toggleTimezoneForm}>
+                  수정
+                </button>
+              </>
+            )}
+            {showTimezoneForm && (
+              <form onSubmit={saveTimezone} className={cn(s.tzUpdateForm)}>
+                <Select value={timezone} onChange={setTimezone} className={cn(s.tzInput)}>
+                  <TimezoneOptions />
+                </Select>
+                <div className={cn(s.tzSubmitContainer)}>
+                  <button type="submit" className={cn(s.tzSubmit)}>
+                    저장
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
         </div>
       </section>
     </div>

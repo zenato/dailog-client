@@ -8,6 +8,25 @@
   flex-direction: row;
 }
 
+.body {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.updateButton {
+  padding: 0.4rem;
+  border: 0;
+  color: #007bfe;
+  background: none;
+  font-size: 1rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.updateButton:hover {
+  color: #409cfd;
+}
+
 .thumbnailContainer {
   display: flex;
   flex-direction: column;
@@ -64,19 +83,6 @@
   font-weight: bold;
 }
 
-.nameContainer .updateButton {
-  padding: 0.4rem;
-  border: 0;
-  color: #007bfe;
-  background: none;
-  font-size: 1rem;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.nameContainer .updateButton:hover {
-  color: #409cfd;
-}
-
 .nameUpdateForm {
   display: block;
   box-sizing: inherit;
@@ -110,5 +116,63 @@
 }
 
 .nameUpdateForm .nameSubmitContainer .nameSubmit:hover {
+  background-color: #409cfd;
+}
+
+.settingItem {
+  display: flex;
+  flex-direction: row;
+}
+
+.settingItem .label {
+  width: 13rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.settingItem .item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-size: 1rem;
+}
+
+.leftMargin {
+  margin-left: auto;
+}
+
+.tzUpdateForm {
+  display: block;
+  box-sizing: inherit;
+}
+
+.tzUpdateForm .tzInput {
+  width: 100%;
+  padding: 0.4rem 1rem;
+  color: #525252;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.tzUpdateForm .tzSubmitContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.tzUpdateForm .tzSubmitContainer .tzSubmit {
+  padding: 0.4rem 1.3rem;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #007bf3;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tzUpdateForm .tzSubmitContainer .tzSubmit:hover {
   background-color: #409cfd;
 }
