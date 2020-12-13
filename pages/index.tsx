@@ -1,12 +1,12 @@
-export default function Index() {
-  return null
-}
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
-export function getStaticProps() {
-  return {
-    redirect: {
-      destination: '/todo',
-      permanent: false,
-    },
-  }
+export default function Index() {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.replace('/todo')
+  }, [])
+
+  return null
 }
