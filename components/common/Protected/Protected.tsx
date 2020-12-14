@@ -11,7 +11,7 @@ const Protected: FC = ({ children }) => {
     if (!loading && !user) {
       Router.push(LOGIN_URL)
     }
-  })
+  }, [user, loading])
 
   return <>{user ? children : null}</>
 }
