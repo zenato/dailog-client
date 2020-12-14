@@ -10,11 +10,11 @@ export default function TodoDetail() {
   const router = useRouter()
   const { parse } = useDate()
 
-  const { year, month, date } = router.query
+  const { year, month, date } = router.query as { year: string; month: string; date: string }
   const isReady = year && month && date
 
   const { currentDate, params } = useMemo(() => {
-    const currentDate = parse(year as string, month as string, date as string)
+    const currentDate = parse(year, month, date)
     const params = {
       year: currentDate.format('YYYY'),
       month: currentDate.format('M'),
@@ -25,10 +25,7 @@ export default function TodoDetail() {
 
   useEffect(() => {
     if (isReady) {
-      if (
-        currentDate.format('YYYYMD') !==
-        (year as string) + (month as string) + (date as string)
-      ) {
+      if (currentDate.format('YYYYMD') !== year + month + date) {
         router.push(`/todo/${currentDate.format('YYYY/M/D')}`)
       }
     }

@@ -10,17 +10,17 @@ export default function TodoCalendar() {
   const router = useRouter()
   const { parse } = useDate()
 
-  const { year, month } = router.query
+  const { year, month } = router.query as { year: string; month: string }
   const isReady = year && month
 
   const { date, params } = useMemo(() => {
-    const date = parse(year as string, month as string)
+    const date = parse(year, month)
     const params = { year: date.format('YYYY'), month: date.format('M') }
     return { date, params }
   }, [year, month])
 
   useEffect(() => {
-    if (isReady && date.format('YYYYM') !== (year as string) + (month as string)) {
+    if (isReady && date.format('YYYYM') !== year + month) {
       router.push(`/todo/${date.format('YYYY/M')}`)
     }
   }, [isReady])
